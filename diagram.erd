@@ -1,0 +1,22 @@
+erdiagram Teater
+
+notation=default
+
+entity Customer { 
+    id1 key
+    name : string
+    description : string
+}
+
+entity Ticket {
+    id2 key int
+    pris: int
+    antall: int
+}
+
+entity Ticket2 extends Ticket {
+    id3 key int
+    pris: int
+    antall: int
+}
+

@@ -113,27 +113,27 @@ CREATE TABLE Billett (
 -- Create table for 'PrisTabell'
 CREATE TABLE PrisTabell (
     StykkeID INT,
-    BillettType VARCHAR(255),
-    Pris DECIMAL(10, 2),
+    BillettType VARCHAR(50),
+    Pris DECIMAL(10, 2) NOT NULL,
     PRIMARY KEY (StykkeID, BillettType),
-    FOREIGN KEY (BillettType) REFERENCES Billett(BillettType)
+    FOREIGN KEY (BillettType) REFERENCES Billett(BillettType) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Create table for 'Ordre'
 CREATE TABLE Ordre (
     OrdreID INT PRIMARY KEY,
-    KjøpsTid TIME,
-    KjøpsDato DATE,
-    Antall INT,
-    Pris DECIMAL(10, 2),
+    KjøpsTid TIME NOT NULL,
+    KjøpsDato DATE NOT NULL,
+    Antall INT NOT NULL,
+    Pris DECIMAL(10, 2) NOT NULL,
     KundeNr INT,
-    FOREIGN KEY (KundeNr) REFERENCES Kunde(KundeNr)
+    FOREIGN KEY (KundeNr) REFERENCES Kunde(KundeNr) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Create table for 'Kunde'
 CREATE TABLE Kunde (
     KundeNr INT PRIMARY KEY,
-    Navn VARCHAR(255),
-    Mobilnummer VARCHAR(20),
-    Adresse VARCHAR(255)
+    Navn VARCHAR(50) NOT NULL,
+    Mobilnummer VARCHAR(20) NOT NULL,
+    Adresse VARCHAR(50) NOT NULL
 );

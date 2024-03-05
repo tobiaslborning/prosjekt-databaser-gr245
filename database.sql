@@ -66,10 +66,10 @@ CREATE TABLE TeaterStykke (
 CREATE TABLE HarOppgave (
     StykkeID INT,
     AnsattID INT,
-    OppgaveNavn VARCHAR(50) NOT NULL,
+    OppgaveNavn VARCHAR(50),
     FOREIGN KEY (StykkeID) REFERENCES TeaterStykke(StykkeID) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (AnsattID) REFERENCES Ansatt(AnsattID) ON DELETE CASCADE ON UPDATE CASCADE,
-    PRIMARY KEY (StykkeID, AnsattID)
+    PRIMARY KEY (StykkeID, AnsattID, OppgaveNavn)
 );
 
 -- Create table for 'TeaterOppsettning'

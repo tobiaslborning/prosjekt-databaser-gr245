@@ -1,3 +1,4 @@
+
 CREATE TABLE Ansatt (
     AnsattID INT PRIMARY KEY,
     Navn VARCHAR(50) NOT NULL,
@@ -73,7 +74,7 @@ CREATE TABLE TeaterOppsettning (
 
 CREATE TABLE TeaterSal (
     SalNr INT PRIMARY KEY,
-    Navn VARCHAR(50) NOT NULL,
+    Navn VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Sete (
@@ -91,7 +92,7 @@ CREATE TABLE Billett (
     Dato DATE,
     SalNr INT,
     SeteNr INT,
-    BillettType VARCHAR(50) NOT NULL,
+    BillettType VARCHAR(50) NOT NULL, -- Har ett sett med lovlige verdier for StykkeID, disse ligger i PrisTabell, hånderes i applikasjon
     OrdreNr INT,
     Pris INT NOT NULL, --  Kalkulert i applikasjon fra PrisTabell ved å bruke StykkeID og BillettType fra input i applikasjon
     FOREIGN KEY (StykkeID, Dato) REFERENCES TeaterOppsettning(StykkeID, Dato) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -109,8 +110,8 @@ CREATE TABLE PrisTabell (
 
 CREATE TABLE Ordre (
     OrdreID INT PRIMARY KEY,
-    KjøpsTid TIME NOT NULL,
-    KjøpsDato DATE NOT NULL,
+    KjopsTid TIME NOT NULL,
+    KjopsDato DATE NOT NULL,
     Antall INT NOT NULL,
     Pris INT NOT NULL, 
     KundeNr INT,

@@ -81,8 +81,8 @@ CREATE TABLE Sete (
     SalNr INT,
     SeteNr INT,
     RadNr INT NULL, -- Can be null i Område GALLERI (ØVRE/NEDRE) in Sal HovedScene
-    Område VARCHAR(50) NOT NULL,
-    PRIMARY KEY (SalNr, SeteNr),
+    Omrade VARCHAR(50) NOT NULL,
+    PRIMARY KEY (SalNr, SeteNr, RadNr, Omrade), -- [DB2] Lagt til RadNr og Omrade for å kunne fungere i Gamle Scene
     FOREIGN KEY (SalNr) REFERENCES TeaterSal(SalNr) ON DELETE CASCADE ON UPDATE CASCADE
 );
 

@@ -1,9 +1,14 @@
 import sqlite3
 
-def upload():
-    conn = sqlite3.connect('teaterDB.db')
-    cursor = conn.cursor()
-    
+
+conn = sqlite3.connect('teaterDB.db')
+cursor = conn.cursor()
+
+def addSkuespillere():
+    #Fjerner alle skuespillere før innsetting
+    cursor.execute(
+        "DELETE FROM Skuespiller"
+    )
     #Innsetning av skuspiller
     cursor.execute(
         "INSERT INTO Skuespiller VALUES ('5')")
@@ -46,12 +51,20 @@ def upload():
     cursor.execute(
         "INSERT INTO Skuespiller VALUES ('24')")
     
-    
-    
+def addDirektor():
+    # Fjerner alle direktører før innsetting
+    cursor.execute(
+        "DELETE FROM Direktor"
+    )
     #Innsetning av direktør
     cursor.execute(
         "INSERT INTO Direktor VALUES ('25')")
-    
+
+def addHarRolle():
+    #Fjerner alle HarRoller før innsetting
+    cursor.execute(
+        "DELETE FROM HarRolle"
+    )
     #Innsetning av hvem som har hvilke roller
     cursor.execute(
         "INSERT INTO HarRolle VALUES ('5', '1')")
@@ -102,6 +115,11 @@ def upload():
     cursor.execute(
         "INSERT INTO HarRolle VALUES ('24', '23')")
     
+def addRolle():
+    #Fjerner alle roller før innsetting
+    cursor.execute(
+        "DELETE FROM Rolle"
+    )
     #Innsetning av roller
     cursor.execute(
         "INSERT INTO Rolle VALUES ('Haakon Haakonssønn')")
@@ -147,69 +165,77 @@ def upload():
         "INSERT INTO Rolle VALUES ('Natalie Grøndahl Tangen')")
     cursor.execute(
         "INSERT INTO Rolle VALUES ('Åsmund Flaten')")
+
+def addAnsatte():
+    #Fjerner alle ansatte før innsetting
+    cursor.execute(
+        "DELETE FROM Ansatt"
+    )
+    #Innsetning av Ansatt
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (1, 'Mina Rype Stokke', 'NULL', 'Fast')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (2, 'Yury Butusov', 'NULL', 'Fast')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (3, 'Eivind Myren', 'NULL', 'Innleid')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (4, 'Aleksandr Shishkin-Hokusai', 'NULL', 'Fast')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (5, 'Arturo Scotti', 'NULL', 'Midlertidig')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (6, 'Ingunn Beate Strige Øyen', 'NULL', 'Fast')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (7, 'Hans Petter Nilsen', 'NULL', 'Fast')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (8, 'Madeleine Brandtzæg Nilsen', 'NULL', 'Innleid')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (9, 'Synnøve Fossum Eriksen', 'NULL', 'Fast')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (10, 'Emma Caroline Deichmann', 'NULL', 'Midlertidig')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (11, 'Thomas Jensen Takyi', 'NULL', 'Fast')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (12, 'Per Bogstad Gulliksen', 'NULL', 'Innleid')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (13, 'Isak Holmen Sørensen', 'NULL', 'Fast')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (14, 'Fabian Heidelberg Lunde', 'NULL', 'Fast')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (15, 'Emil Olafsson', 'NULL', 'Innleid')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (16, 'Snorre Ryen Tøndel', 'NULL', 'Fast')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (17, 'Sunniva Du Mond Nordal', 'NULL', 'Fast')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (18, 'Jo Saberniak', 'NULL', 'Innleid')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (19, 'Marte.M Steinholt', 'NULL', 'Fast')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (20, 'Tor Ivar Hagen', 'NULL', 'Midlertidig')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (21, 'Trond-Ove Skrødal', 'NULL', 'Fast')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (22, 'Natalie Grøndahl Tangen', 'NULL', 'Fast')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (23, 'Åsmund Flaten', 'NULL', 'Innleid')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (24, 'Jonas Corell Petersen', 'NULL', 'Fast')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (25, 'David Gehrt', 'NULL', 'Fast')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (26, 'Gaute Tønder', 'NULL', 'Fast')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (27, 'Magnus Mikaelsen', 'NULL', 'Innleid')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (28, 'Kristoffer Spender', 'NULL', 'Fast')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (29, 'Elisabeth Egseth Hansen', 'NULL', 'Fast')")
     
-    #Innsetning av ansatte
+def addHarOppgave():
+    #Fjerner alle HarOppgaver før innsetting
     cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Mina Rype Stokke', 'NULL', 'Fast')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Yury Butusov', 'NULL', 'Fast')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Eivind Myren', 'NULL', 'Innleid')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Aleksandr Shishkin-Hokusai, 'NULL', 'Fast')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Arturo Scotti, 'NULL', 'Midlertidig')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Ingunn Beate Strige Øyen, 'NULL', 'Fast')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Hans Petter Nilsen, 'NULL', 'Fast')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Madeleine Brandtzæg Nilsen, 'NULL', 'Innleid')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Synnøve Fossum Eriksen, 'NULL', 'Fast')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Emma Caroline Deichmann, 'NULL', 'Midlertidig')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Thomas Jensen Takyi', 'NULL', 'Fast')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Per Bogstad Gulliksen', 'NULL', 'Innleid')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Isak Holmen Sørensen', 'NULL', 'Fast')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Fabian Heidelberg Lunde', 'NULL', 'Fast')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Emil Olafsson', 'NULL', 'Innleid')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Snorre Ryen Tøndel', 'NULL', 'Fast')")
-    
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Sunniva Du Mond Nordal', 'NULL', 'Fast')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Jo Saberniak', 'NULL', 'Innleid')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Marte.M Steinholt', 'NULL', 'Fast')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Tor Ivar Hagen', 'NULL', 'Midlertidig')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Trond-Ove Skrødal', 'NULL', 'Fast')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Natalie Grøndahl Tangen', 'NULL', 'Fast')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Åsmund Flaten', 'NULL', 'Innleid')")
-    
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Jonas Corell Petersen', 'NULL', 'Fast')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('David Gehrt', 'NULL', 'Fast')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Gaute Tønder', 'NULL', 'Fast')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Magnus Mikaelsen', 'NULL', 'Innleid')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Kristoffer Spender', 'NULL', 'Fast')")
-    cursor.execute(
-        "INSERT INTO Ansatte VALUES ('Elisabeth Egseth Hansen', 'NULL', 'Fast')")
-    
+        "DELETE FROM HarOppgaver"
+    )
     #Innsetning av HarOppgave
     cursor.execute(
         "INSERT INTO HarOppgaver VALUES ('1', '1', 'Dramaturg')")
@@ -270,8 +296,11 @@ def upload():
     cursor.execute(
         "INSERT INTO HarOppgaver VALUES ('2', '28', 'Dramaturg')")
    
-   
-
+def addKunde():
+    #Fjerner alle kunder før innsetting
+    cursor.execute(
+        "DELETE FROM Kunde"
+    )
     #Innsetning av kunde
     cursor.execute(
         "INSERT INTO Kunde VALUES ('1', 'Eivind Holmen', '94129340', 'Klaebuveien 49')")
@@ -279,23 +308,23 @@ def upload():
         "INSERT INTO Kunde VALUES ('2', 'Åsmund Løvoll', '95239450', 'Mollenbergveien 8')")
     cursor.execute(
         "INSERT INTO Kunde VALUES ('3', 'Tobias Borning', '98593210', 'Gloshaugveien 5')")
-
-    
-    
-    
-   
-    #Innsetning av saler
     cursor.execute(
-        "INSERT INTO TeaterSal VALUES ('Hovedscenen')")
-    cursor.execute(
-        "INSERT INTO TeaterSal VALUES ('Gamle Scene')")
+        "INSERT INTO Kunde VALUES ('4', 'Ola Nordmann', '94129340', 'Klaebuveien 48')")
     
+def addTeaterStykke():    
+    #Fjerner alle teaterstykker før innsetting
+    cursor.execute("DELETE FROM TeaterStykke")
     #Innsetning av teaterstykke
     cursor.execute(
-        "INSERT INTO TeaterStykke VALUES ('Størst av alt er kjærligheten', '2')")
+        "INSERT INTO TeaterStykke VALUES (1,'Størst av alt er kjærligheten', '2')") #Størst av alt er kjærligheten har id 1
     cursor.execute(
-        "INSERT INTO TeaterStykke VALUES ('Kongsemnene', '1')")
+        "INSERT INTO TeaterStykke VALUES (2,'Kongsemnene', '1')") #Kongsemnene har id 2
     
+def addTeaterOppsettning():
+    #Fjerner alle teateroppsetninger før innsetting
+    cursor.execute(
+        "DELETE FROM TeaterOppsettning"
+    )
     #Innsetning av teateroppsetning
     cursor.execute(
         "INSERT INTO TeaterOppsettning VALUES ('03-02-2024', '1')")
@@ -320,6 +349,11 @@ def upload():
     cursor.execute(
         "INSERT INTO TeaterOppsettning VALUES ('06-02-2024', '2')")
 
+def addAkt():
+    #Fjerner alle akt før innsetting
+    cursor.execute(
+        "DELETE FROM Akt"
+    )
     #Innsetning av Akter
     cursor.execute(
         "INSERT INTO Akt VALUES ('2', 'Intro')")
@@ -333,7 +367,12 @@ def upload():
         "INSERT INTO Akt VALUES ('2', 'Avslutning')")
     cursor.execute(
         "INSERT INTO Akt VALUES ('1', 'Kjærlighet')")
-    
+
+def addRolleIAkt():
+    #Fjerner alle roller i akt før innsetting
+    cursor.execute(
+        "DELETE FROM RolleIAkt"
+    )
     #Innsetning av Roller i Akter
     cursor.execute(
         "INSERT INTO RolleIAkt VALUES ('1', '2', '1')")
@@ -448,29 +487,146 @@ def upload():
     cursor.execute(
         "INSERT INTO RolleIAkt VALUES ('1', '1', '22')")
     
+def addPrisTabell():
+    #Fjerner alle priser før innsetting
+    cursor.execute(
+        "DELETE FROM PrisTabell"
+    )
     #Innsetning av pris tabell
     cursor.execute(
-        "INSERT INTO PrisTabell VALUES ('1', '1', '350')")
+        "INSERT INTO PrisTabell VALUES ('1', 'Ordinær', '350')")
     cursor.execute(
-        "INSERT INTO PrisTabell VALUES ('1', '2', '300')")
+        "INSERT INTO PrisTabell VALUES ('1', 'Honnør', '300')")
     cursor.execute(
-        "INSERT INTO PrisTabell VALUES ('1', '3', '220')")
+        "INSERT INTO PrisTabell VALUES ('1', 'Student', '220')")
     cursor.execute(
-        "INSERT INTO PrisTabell VALUES ('1', '4', '220')")
+        "INSERT INTO PrisTabell VALUES ('1', 'Barn', '220')")
+    # cursor.execute(                                       fjernes, skal håndteres av applikasjon
+    #    "INSERT INTO PrisTabell VALUES ('1', '5', '320')") 
+    # cursor.execute(
+    #    "INSERT INTO PrisTabell VALUES ('1', '6', '270')")
     cursor.execute(
-        "INSERT INTO PrisTabell VALUES ('1', '5', '320')")
+        "INSERT INTO PrisTabell VALUES ('2', 'Ordinær', '450')")
     cursor.execute(
-        "INSERT INTO PrisTabell VALUES ('1', '6', '270')")
+        "INSERT INTO PrisTabell VALUES ('2', 'Honnør', '380')")
     cursor.execute(
-        "INSERT INTO PrisTabell VALUES ('2', '1', '450')")
+        "INSERT INTO PrisTabell VALUES ('2', 'Student', '280')")
+    # cursor.execute(                                       fjernes, skal håndteres av applikasjon
+    #    "INSERT INTO PrisTabell VALUES ('2', '4', '420')")
+    # cursor.execute(
+    #     "INSERT INTO PrisTabell VALUES ('2', '5', '360')")
+
+def addSalAndSete():
+    # Slett alt i TeaterSal og Sete
+    cursor.execute('DELETE FROM TeaterSal')
+    cursor.execute('DELETE FROM Sete')
+    seteID = 0
+
+    # --------------------- HOVEDSCENE -----------------------
+
+    # Opprett Hovedscene
+    cursor.execute("INSERT INTO TeaterSal VALUES (1,'Hovedscenen')")
+
+    # Parkett hovedscenen
+    seteNr = 0
+    for radNr in range(1,19): # rad 1-18
+        for i in range(0,28): # fyller radene
+            seteNr += 1
+            seteID += 1
+            if (seteNr in range(467,471) or seteNr in range(495,499)): # sete 1 - 504
+                print(f"Did not insert:{seteNr}")
+            else:
+                cursor.execute("INSERT INTO Sete VALUES (?,1,?,?,'Parkett')", (seteID, seteNr, radNr))
+
+    # Galleri øvre
+    for i in range(505,525): # sete 505 - 524
+        seteNr += 1
+        seteID += 1
+        if (seteNr < 515):
+            cursor.execute("INSERT INTO Sete VALUES (?,1,?,?,'Galleri Nedre')", (seteID, seteNr, radNr))
+        else:
+            cursor.execute("INSERT INTO Sete VALUES (?,1,?,?,'Galleri Øvre')", (seteID, seteNr, radNr))
+
+    # --------------------- GAMLE SCENE -----------------------
+
+    # Opprett Gamle Scene
+    cursor.execute("INSERT INTO TeaterSal VALUES (2,'Gamle Scene')")
+
+    # Parkett
+    for radNr in [1,4,5,7]: #Rader med 18 seter
+        for seteNr in range(1,19): 
+            seteID += 1
+            cursor.execute("INSERT INTO Sete VALUES (?,2,?,?,'Parkett')",(seteID, seteNr,radNr))
+
+    for radNr in [3,6,8,9]: #Rader med 17 seter
+        for seteNr in range(1,18): 
+            seteID += 1
+            cursor.execute("INSERT INTO Sete VALUES (?,2,?,?,'Parkett')",(seteID, seteNr,radNr))
+
+    for seteNr in range(1,17): # Rad med 16 seter
+        seteID += 1
+        cursor.execute("INSERT INTO Sete VALUES (?,2,?,?,'Parkett')",(seteID, seteNr,2))
+
+    for seteNr in range(1,15): # Rad med 14 seter
+        seteID += 1
+        cursor.execute("INSERT INTO Sete VALUES (?,2,?,?,'Parkett')",(seteID, seteNr,10))
+
+    # Balkong
+    for seteNr in range(1,29): # 1-29 rad 1
+        seteID += 1
+        cursor.execute("INSERT INTO Sete VALUES (?,2,?,?,'Balkong')",(seteID, seteNr,1))
+
+    for seteNr in range(1,28): # 1-28 rad 2
+        seteID += 1
+        cursor.execute("INSERT INTO Sete VALUES (?,2,?,?,'Balkong')",(seteID, seteNr,2))
+
+    for seteNr in range(1,23): # 1-22 rad 3
+        seteID += 1
+        cursor.execute("INSERT INTO Sete VALUES (?,2,?,?,'Balkong')",(seteID, seteNr,3))
+
+    for seteNr in range(1,18): # 1-17 rad 4
+        seteID += 1
+        cursor.execute("INSERT INTO Sete VALUES (?,2,?,?,'Balkong')",(seteID, seteNr,4))
+
+    # Galleri 
+    for seteNr in range(1,34): # 1-33 rad 1
+        seteID += 1
+        cursor.execute("INSERT INTO Sete VALUES (?,2,?,?,'Galleri')",(seteID, seteNr,1))
+
+    for seteNr in range(1,19): # 1-18 rad 1
+        seteID += 1
+        cursor.execute("INSERT INTO Sete VALUES (?,2,?,?,'Galleri')",(seteID, seteNr,2))
+
+    for seteNr in range(1,18): # 1-17 rad 1
+        seteID += 1
+        cursor.execute("INSERT INTO Sete VALUES (?,2,?,?,'Galleri')",(seteID, seteNr,3))
+
+def buy9Tickets():
+    # opprett ordre
     cursor.execute(
-        "INSERT INTO PrisTabell VALUES ('2', '2', '380')")
-    cursor.execute(
-        "INSERT INTO PrisTabell VALUES ('2', '3', '280')")
-    cursor.execute(
-        "INSERT INTO PrisTabell VALUES ('2', '4', '420')")
-    cursor.execute(
-        "INSERT INTO PrisTabell VALUES ('2', '5', '360')")
+        "INSERT INTO Ordre VALUES (1, '10:00', '03-02-2024', 9, 3150, 4)"
+    )
+    # legg til billetter
+    for i in range(9):
+        cursor.execute("INSERT INTO Billett VALUES (?,1,'03-02-2024',?,'Ordinær',1,350)", (i, 525+i))
+
+def upload():
+    addSalAndSete() 
+    addTeaterStykke() 
+    addTeaterOppsettning() 
+    #addAnsatte()
+    #addSkuespillere()
+    #addDirektor()
+    #addRolle() 
+    #addHarRolle()
+    #addAkt()
+    #addRolleIAkt()
+    #addHarOppgave()
+    addKunde()
+    addPrisTabell()
+    buy9Tickets()
     
-    
-    
+
+upload()
+conn.commit()
+conn.close()

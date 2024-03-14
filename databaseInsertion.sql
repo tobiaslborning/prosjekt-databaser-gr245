@@ -78,11 +78,11 @@ CREATE TABLE TeaterSal (
 );
 
 CREATE TABLE Sete (
+    SeteID INT PRIMARY KEY, -- [DB2] Lagt til RadNr og Omrade for å kunne fungere i Gamle Scene, i tillegg til å minke redundans i billett
     SalNr INT,
     SeteNr INT,
     RadNr INT NULL, -- Can be null i Område GALLERI (ØVRE/NEDRE) in Sal HovedScene
     Omrade VARCHAR(50) NOT NULL,
-    PRIMARY KEY (SalNr, SeteNr, RadNr, Omrade), -- [DB2] Lagt til RadNr og Omrade for å kunne fungere i Gamle Scene
     FOREIGN KEY (SalNr) REFERENCES TeaterSal(SalNr) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -90,13 +90,12 @@ CREATE TABLE Billett (
     BillettNr INT PRIMARY KEY,
     StykkeID INT,
     Dato DATE,
-    SalNr INT,
-    SeteNr INT,
+    SeteID INT,
     BillettType VARCHAR(50) NOT NULL, -- Har ett sett med lovlige verdier for StykkeID, disse ligger i PrisTabell, hånderes i applikasjon
     OrdreNr INT,
     Pris INT NOT NULL, --  Kalkulert i applikasjon fra PrisTabell ved å bruke StykkeID og BillettType fra input i applikasjon
     FOREIGN KEY (StykkeID, Dato) REFERENCES TeaterOppsettning(StykkeID, Dato) ON DELETE RESTRICT ON UPDATE CASCADE,
-    FOREIGN KEY (SalNr, SeteNr) REFERENCES Sete(SalNr, SeteNr) ON DELETE RESTRICT ON UPDATE CASCADE,
+    FOREIGN KEY (SeteId) REFERENCES Sete(SeteID) ON DELETE RESTRICT ON UPDATE CASCADE,
     FOREIGN KEY (OrdreNr) REFERENCES Ordre(OrdreID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 

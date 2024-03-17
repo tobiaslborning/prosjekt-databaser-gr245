@@ -12,45 +12,43 @@ def addSkuespillere():
     )
     #Innsetning av skuspiller
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('5')")
+        "INSERT INTO Skuespiller VALUES ('5','5')") #Setter skuespillerID til å være lik AnsattID
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('6')")
+        "INSERT INTO Skuespiller VALUES ('6','6')") 
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('7')")
+        "INSERT INTO Skuespiller VALUES ('7', '7')") 
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('8')")
+        "INSERT INTO Skuespiller VALUES ('8', '8')")
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('9')")
+        "INSERT INTO Skuespiller VALUES ('9', '9')")
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('10')")
+        "INSERT INTO Skuespiller VALUES ('10', '10')")
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('11')")
+        "INSERT INTO Skuespiller VALUES ('11', '11')")
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('12')")
+        "INSERT INTO Skuespiller VALUES ('12', '12')")
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('13')")
+        "INSERT INTO Skuespiller VALUES ('13', '13')")
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('14')")
+        "INSERT INTO Skuespiller VALUES ('14', '14')")
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('15')")
+        "INSERT INTO Skuespiller VALUES ('15', '15')")
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('16')")
+        "INSERT INTO Skuespiller VALUES ('16', '16')")
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('17')")
+        "INSERT INTO Skuespiller VALUES ('17', '17')")
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('18')")
+        "INSERT INTO Skuespiller VALUES ('18', '18')")
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('19')")
+        "INSERT INTO Skuespiller VALUES ('19', '19')")
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('20')")
+        "INSERT INTO Skuespiller VALUES ('20', '20')")
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('21')")
+        "INSERT INTO Skuespiller VALUES ('21', '21')")
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('22')")
+        "INSERT INTO Skuespiller VALUES ('22', '22')")
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('23')")
-    cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('24')")
+        "INSERT INTO Skuespiller VALUES ('23', '23')")
     
 def addDirektor():
     # Fjerner alle direktører før innsetting
@@ -59,7 +57,7 @@ def addDirektor():
     )
     #Innsetning av direktør
     cursor.execute(
-        "INSERT INTO Direktor VALUES ('25')")
+        "INSERT INTO Direktor VALUES ('25','30')")
 
 def addHarRolle():
     #Fjerner alle HarRoller før innsetting
@@ -123,49 +121,49 @@ def addRolle():
     )
     #Innsetning av roller
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Haakon Haakonssønn')")
+        "INSERT INTO Rolle VALUES ('1', 'Haakon Haakonssønn')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Inga fra Vartejg (Haakons Mor)')")
+        "INSERT INTO Rolle VALUES ('2', 'Inga fra Vartejg (Haakons Mor)')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Skule jarl')")
+        "INSERT INTO Rolle VALUES ('3', 'Skule jarl')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Fru Ragnhild (Skules hustru)')")
+        "INSERT INTO Rolle VALUES ('4', 'Fru Ragnhild (Skules hustru)')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Margrete (Skules datter)')")
+        "INSERT INTO Rolle VALUES ('5', 'Margrete (Skules datter)')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Sigrid (Skules søster)')")
+        "INSERT INTO Rolle VALUES ('6', 'Sigrid (Skules søster)')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Ingebjørg')")
+        "INSERT INTO Rolle VALUES ('7', 'Ingebjørg')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Biskop Nikolas')")
+        "INSERT INTO Rolle VALUES ('8', 'Biskop Nikolas')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Gregorius Jonssønn')")
+        "INSERT INTO Rolle VALUES ('9', 'Gregorius Jonssønn')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Paal Flida')")
+        "INSERT INTO Rolle VALUES ('10', 'Paal Flida')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Trønder')")
+        "INSERT INTO Rolle VALUES ('11', 'Trønder')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Baard Bratte')")
+        "INSERT INTO Rolle VALUES ('12', 'Baard Bratte')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Jatgeir Skald')")
+        "INSERT INTO Rolle VALUES ('13', 'Jatgeir Skald')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Dagfinn Bonde')")
+        "INSERT INTO Rolle VALUES ('14', 'Dagfinn Bonde')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Peter (prest og Ingebjørgs sønn)')")
+        "INSERT INTO Rolle VALUES ('15', 'Peter (prest og Ingebjørgs sønn)')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Sunniva Du Mond Nordal')")
+        "INSERT INTO Rolle VALUES ('16', 'Sunniva Du Mond Nordal')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Jo Saberniak')")
+        "INSERT INTO Rolle VALUES ('17', 'Jo Saberniak')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Marte.M Steinholt')")
+        "INSERT INTO Rolle VALUES ('18', 'Marte.M Steinholt')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Tor Ivar Hagen')")
+        "INSERT INTO Rolle VALUES ('19', 'Tor Ivar Hagen')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Trond-Ove Skrødal')")
+        "INSERT INTO Rolle VALUES ('20', 'Trond-Ove Skrødal')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Natalie Grøndahl Tangen')")
+        "INSERT INTO Rolle VALUES ('21', 'Natalie Grøndahl Tangen')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('Åsmund Flaten')")
+        "INSERT INTO Rolle VALUES ('22', 'Åsmund Flaten')")
 
 def addAnsatte():
     #Fjerner alle ansatte før innsetting
@@ -181,6 +179,8 @@ def addAnsatte():
         "INSERT INTO Ansatt VALUES (3, 'Eivind Myren', 'NULL', 'Innleid')")
     cursor.execute(
         "INSERT INTO Ansatt VALUES (4, 'Aleksandr Shishkin-Hokusai', 'NULL', 'Fast')")
+    
+
     cursor.execute(
         "INSERT INTO Ansatt VALUES (5, 'Arturo Scotti', 'NULL', 'Midlertidig')")
     cursor.execute(
@@ -219,6 +219,8 @@ def addAnsatte():
         "INSERT INTO Ansatt VALUES (22, 'Natalie Grøndahl Tangen', 'NULL', 'Fast')")
     cursor.execute(
         "INSERT INTO Ansatt VALUES (23, 'Åsmund Flaten', 'NULL', 'Innleid')")
+    
+
     cursor.execute(
         "INSERT INTO Ansatt VALUES (24, 'Jonas Corell Petersen', 'NULL', 'Fast')")
     cursor.execute(
@@ -231,71 +233,74 @@ def addAnsatte():
         "INSERT INTO Ansatt VALUES (28, 'Kristoffer Spender', 'NULL', 'Fast')")
     cursor.execute(
         "INSERT INTO Ansatt VALUES (29, 'Elisabeth Egseth Hansen', 'NULL', 'Fast')")
+    cursor.execute(
+        "INSERT INTO Ansatt VALUES (30, 'Lars Kirksæther','NULL', 'Fast')")
     
 def addHarOppgave():
     #Fjerner alle HarOppgaver før innsetting
     cursor.execute(
-        "DELETE FROM HarOppgaver"
+        "DELETE FROM HarOppgave"
     )
     #Innsetning av HarOppgave
     cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('1', '1', 'Dramaturg')")
+        "INSERT INTO HarOppgave VALUES ('1', '1', 'Dramaturg')")
     cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('1', '2', 'Regi og Musikkutvelgelse')")
+        "INSERT INTO HarOppgave VALUES ('1', '2', 'Regi og Musikkutvelgelse')")
     cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('1', '3', 'Lysdesign')")
+        "INSERT INTO HarOppgave VALUES ('1', '3', 'Lysdesign')")
     cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('1', '4', 'Scenografi og Kostymer')")
-    cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('1', '5', 'Skuespiller')")
-    cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('1', '6', 'Skuespiller')")
-    cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('1', '7', 'Skuespiller')")
-    cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('1', '8', 'Skuespiller')")
-    cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('1', '9', 'Skuespiller')")
-    cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('1', '10', 'Skuespiller')")
-    cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('1', '11', 'Skuespiller')")
-    cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('1', '12', 'Skuespiller')")
-    cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('1', '13', 'Skuespiller')")
-    cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('1', '14', 'Skuespiller')")
-    cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('1', '15', 'Skuespiller')")
-    cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('1', '16', 'Skuespiller')")
+        "INSERT INTO HarOppgave VALUES ('1', '4', 'Scenografi og Kostymer')")
     
     cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('2', '17', 'Skuespiller')")
+        "INSERT INTO HarOppgave VALUES ('1', '5', 'Skuespiller')")
     cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('2', '18', 'Skuespiller')")
+        "INSERT INTO HarOppgave VALUES ('1', '6', 'Skuespiller')")
     cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('2', '19', 'Skuespiller')")
+        "INSERT INTO HarOppgave VALUES ('1', '7', 'Skuespiller')")
     cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('2', '20', 'Skuespiller')")
+        "INSERT INTO HarOppgave VALUES ('1', '8', 'Skuespiller')")
     cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('2', '21', 'Skuespiller')")
+        "INSERT INTO HarOppgave VALUES ('1', '9', 'Skuespiller')")
     cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('2', '22', 'Skuespiller')")
+        "INSERT INTO HarOppgave VALUES ('1', '10', 'Skuespiller')")
     cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('2', '23', 'Skuespiller')")
+        "INSERT INTO HarOppgave VALUES ('1', '11', 'Skuespiller')")
+    cursor.execute(
+        "INSERT INTO HarOppgave VALUES ('1', '12', 'Skuespiller')")
+    cursor.execute(
+        "INSERT INTO HarOppgave VALUES ('1', '13', 'Skuespiller')")
+    cursor.execute(
+        "INSERT INTO HarOppgave VALUES ('1', '14', 'Skuespiller')")
+    cursor.execute(
+        "INSERT INTO HarOppgave VALUES ('1', '15', 'Skuespiller')")
+    cursor.execute(
+        "INSERT INTO HarOppgave VALUES ('1', '16', 'Skuespiller')")
     
     cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('2', '24', 'Regi')")
+        "INSERT INTO HarOppgave VALUES ('2', '17', 'Skuespiller')")
     cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('2', '25', 'Scenografi og Kostymer')")
+        "INSERT INTO HarOppgave VALUES ('2', '18', 'Skuespiller')")
     cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('2', '26', 'Musikalsk ansvarlig')")
+        "INSERT INTO HarOppgave VALUES ('2', '19', 'Skuespiller')")
     cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('2', '27', 'Lysdesign')")
+        "INSERT INTO HarOppgave VALUES ('2', '20', 'Skuespiller')")
     cursor.execute(
-        "INSERT INTO HarOppgaver VALUES ('2', '28', 'Dramaturg')")
+        "INSERT INTO HarOppgave VALUES ('2', '21', 'Skuespiller')")
+    cursor.execute(
+        "INSERT INTO HarOppgave VALUES ('2', '22', 'Skuespiller')")
+    cursor.execute(
+        "INSERT INTO HarOppgave VALUES ('2', '23', 'Skuespiller')")
+    
+    cursor.execute(
+        "INSERT INTO HarOppgave VALUES ('2', '24', 'Regi')")
+    cursor.execute(
+        "INSERT INTO HarOppgave VALUES ('2', '25', 'Scenografi og Kostymer')")
+    cursor.execute(
+        "INSERT INTO HarOppgave VALUES ('2', '26', 'Musikalsk ansvarlig')")
+    cursor.execute(
+        "INSERT INTO HarOppgave VALUES ('2', '27', 'Lysdesign')")
+    cursor.execute(
+        "INSERT INTO HarOppgave VALUES ('2', '28', 'Dramaturg')")
    
 def addKunde():
     #Fjerner alle kunder før innsetting
@@ -357,17 +362,17 @@ def addAkt():
     )
     #Innsetning av Akter
     cursor.execute(
-        "INSERT INTO Akt VALUES ('2', 'Intro')")
+        "INSERT INTO Akt VALUES (1, '2', 'Intro')")
     cursor.execute(
-        "INSERT INTO Akt VALUES ('2', ''Midt 1)")
+        "INSERT INTO Akt VALUES (2, '2', 'Midt 1')")
     cursor.execute(
-        "INSERT INTO Akt VALUES ('2', 'Midt 2')")
+        "INSERT INTO Akt VALUES (3, '2', 'Midt 2')")
     cursor.execute(
-        "INSERT INTO Akt VALUES ('2', 'Midt 3')")
+        "INSERT INTO Akt VALUES (4, '2', 'Midt 3')")
     cursor.execute(
-        "INSERT INTO Akt VALUES ('2', 'Avslutning')")
+        "INSERT INTO Akt VALUES (5, '2', 'Avslutning')")
     cursor.execute(
-        "INSERT INTO Akt VALUES ('1', 'Kjærlighet')")
+        "INSERT INTO Akt VALUES (1, '1', 'Kjærlighet')")
 
 def addRolleIAkt():
     #Fjerner alle roller i akt før innsetting
@@ -612,6 +617,11 @@ def buy9Tickets():
     cursor.execute(
         "INSERT INTO Ordre VALUES (?,'10:00', '03-02-2024', 9, 3150, 4)",(ordreNr,)
     )
+
+    # Count the number of existing tickets
+    cursor.execute("SELECT COUNT(*) FROM Billett")
+    num_tickets = cursor.fetchone()[0]
+
     # legg til billetter
     for i in range(9):
         cursor.execute("INSERT INTO Billett(StykkeID,Dato,SeteID,BillettType,OrdreNr,Pris) VALUES (1,'03-02-2024',?,'Ordinær',1,350)", (525+i,))
@@ -623,14 +633,14 @@ def upload():
     addSalAndSete() 
     addTeaterStykke() 
     addTeaterOppsettning() 
-    #addAnsatte()
-    #addSkuespillere()
-    #addDirektor()
-    #addRolle() 
-    #addHarRolle()
-    #addAkt()
-    #addRolleIAkt()
-    #addHarOppgave()
+    addAnsatte()
+    addSkuespillere()
+    addDirektor()
+    addRolle() 
+    addHarRolle()
+    addAkt()
+    addRolleIAkt()
+    addHarOppgave()
     addKunde()
     addPrisTabell()
 

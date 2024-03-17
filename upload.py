@@ -1,4 +1,5 @@
 import sqlite3
+import queries
 
 
 conn = sqlite3.connect('teaterDB.db')
@@ -603,12 +604,20 @@ def addSalAndSete():
 
 def buy9Tickets():
     # opprett ordre
+    ordreNr = queries.generateNewOrderNumber()
+
+    conn = sqlite3.connect('teaterDB.db')
+    cursor = conn.cursor()
+
     cursor.execute(
-        "INSERT INTO Ordre VALUES (1, '10:00', '03-02-2024', 9, 3150, 4)"
+        "INSERT INTO Ordre VALUES (?,'10:00', '03-02-2024', 9, 3150, 4)",(ordreNr,)
     )
     # legg til billetter
     for i in range(9):
-        cursor.execute("INSERT INTO Billett VALUES (?,1,'03-02-2024',?,'Ordinær',1,350)", (i, 525+i))
+        cursor.execute("INSERT INTO Billett(StykkeID,Dato,SeteID,BillettType,OrdreNr,Pris) VALUES (1,'03-02-2024',?,'Ordinær',1,350)", (525+i,))
+
+    conn.commit()
+    conn.close()
 
 def upload():
     addSalAndSete() 
@@ -624,9 +633,9 @@ def upload():
     #addHarOppgave()
     addKunde()
     addPrisTabell()
-    buy9Tickets()
-    
 
 upload()
 conn.commit()
 conn.close()
+
+buy9Tickets()

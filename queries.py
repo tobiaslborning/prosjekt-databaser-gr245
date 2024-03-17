@@ -1,5 +1,24 @@
 import sqlite3
 
+def getTeaterStykkeID(stykkeNavn):
+    """
+    Retrieves the TeaterStykkeID from the database based on the provided parameters.
+
+    Parameters:
+    teaterStykke (str): The name of the play.
+
+    Returns:
+    int: The TeaterStykkeID of the play.
+
+    """
+    con = sqlite3.connect('teaterDB.db')
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM sqlite_master")
+
+    cursor.execute("SELECT StykkeID FROM TeaterStykke WHERE Navn = ?", (stykkeNavn,))
+    stykkeID = cursor.fetchone()
+    con.close()
+    return stykkeID[0]
 
 def getSeteID(salNr, seteNr, radNr, omrade):
     """
@@ -23,8 +42,92 @@ def getSeteID(salNr, seteNr, radNr, omrade):
     cursor.execute("SELECT SeteID FROM Sete WHERE SalNr = ? AND SeteNr = ? AND RadNr = ? AND Omrade = ?", (salNr, seteNr, radNr, omrade))
     seteID = cursor.fetchone()
     con.close()
-    sysout = "SeteID: " + str(seteID[0])
-    print(sysout)
     return seteID[0]
 
-getSeteID(2, 1, 1, "Balkong")
+print(getSeteID(2, 1, 1, "Balkong"))
+
+def getSoldSeats(stykkeID, dato):
+    """
+    Retrieves the sold seats from the database based on the provided parameters.
+
+    Parameters:
+    teaterStykke (str): The name of the play.
+    dato (str): The date of the play.
+
+    Returns:
+    list: A list of the sold seatIDs.
+
+    """
+    con = sqlite3.connect('teaterDB.db')
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM sqlite_master")
+
+    cursor.execute("SELECT SeteID FROM Billett WHERE StykkeID = ? AND Dato = ?", (stykkeID, dato))
+    seteID = cursor.fetchall()
+    con.close()
+    return [x[0] for x in seteID]
+
+print(getSoldSeats("1","03-02-2024"))
+
+def isSeatSold(stykkeID, dato, seteNr, radNr, omrade):
+    """
+    Checks if a seat is sold based on the provided parameters.
+
+    Parameters:
+    teaterStykke (str): The name of the play.
+    dato (str): The date of the play.
+    seteNr (int): The number of the seat.
+    radNr (int): The number of the row.
+    omrade (str): The area of the seat.
+
+    Returns:
+    bool: True if the seat is sold, False if not.
+
+    """
+    con = sqlite3.connect('teaterDB.db')
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM sqlite_master")
+
+    cursor.execute("SELECT SalNr FROM TeaterStykke WHERE StykkeID = ?", (stykkeID))
+    salNr = cursor.fetchone()
+    con.close()
+    seteID = getSeteID(salNr[0],seteNr,radNr,omrade)
+    return seteID in [x for x in getSoldSeats(stykkeID,dato)]
+
+print(isSeatSold("1","03-02-2024",1,1,"Parkett"))
+
+def getStykkerByDato(dato):
+    """
+    Retrieves the plays from the database based on the provided date.
+
+    Parameters:
+    dato (str): The date of the play.
+
+    Returns:
+    list: A list of the plays on the date.
+
+    """
+    con = sqlite3.connect('teaterDB.db')
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM sqlite_master")
+
+    cursor.execute(
+        "SELECT DISTINCT TeaterStykke.Navn FROM TeaterOppsettning NATURAL JOIN TeaterStykke WHERE TeaterOppsettning.Dato = ?", (dato,)) # komma etter dato løser biding error
+    navn = cursor.fetchall()
+    con.close()
+    return [x[0] for x in navn]
+
+print(getStykkerByDato("05-02-2024"))
+
+def generateNewOrderNumber():
+    con = sqlite3.connect('teaterDB.db')
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM sqlite_master")
+
+    cursor.execute(
+        "SELECT COUNT(*) FROM Ordre")
+    antall = cursor.fetchone()
+    con.close()
+    return antall[0]+1
+
+print(generateNewOrderNumber())

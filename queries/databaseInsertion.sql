@@ -87,7 +87,7 @@ CREATE TABLE Sete (
 );
 
 CREATE TABLE Billett (
-    BillettNr INT PRIMARY KEY,
+    BillettNr INTEGER PRIMARY KEY,
     StykkeID INT,
     Dato DATE,
     SeteID INT,
@@ -103,12 +103,11 @@ CREATE TABLE PrisTabell (
     StykkeID INT,
     BillettType VARCHAR(50),
     Pris INT NOT NULL,
-    PRIMARY KEY (StykkeID, BillettType),
-    FOREIGN KEY (BillettType) REFERENCES Billett(BillettType) ON DELETE CASCADE ON UPDATE CASCADE
+    PRIMARY KEY (StykkeID, BillettType)
 );
 
 CREATE TABLE Ordre (
-    OrdreID INT PRIMARY KEY,
+    OrdreID INTEGER PRIMARY KEY, -- BYTTE TIL INTEGER for AutoIncrement
     KjopsTid TIME NOT NULL,
     KjopsDato DATE NOT NULL,
     Antall INT NOT NULL,

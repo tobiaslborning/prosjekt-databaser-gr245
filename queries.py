@@ -139,16 +139,16 @@ def getStykkerByDato(dato):
 
 print(getStykkerByDato("05-02-2024"))
 
-def generateNewOrderNumber(): # denne er litt svak
+def generateNewOrderNumber(): 
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
 
     cursor.execute(
-        "SELECT COUNT(*) FROM Ordre")
+        "SELECT OrdreID FROM Ordre ORDER BY OrdreID DESC LIMIT 1")
     antall = cursor.fetchone()
     con.close()
-    return antall[0]+1
+    return int(antall[0])+1
 
 print(generateNewOrderNumber())
 
@@ -400,3 +400,33 @@ def getBilletterInOrdre(ordreNr):
     con.close()
     return ordre
 
+def getKundeOrdre(telefon):
+    con = sqlite3.connect('teaterDB.db')
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM sqlite_master")
+
+    cursor.execute('''
+                    SELECT o.OrdreID
+                    FROM Ordre as o
+                    JOIN Kunde as k
+                    ON o.KundeNr = k.KundeNr
+                    WHERE k.Mobilnummer = ?
+                   ''', (telefon,))
+    ordre = cursor.fetchall()
+    con.close()
+
+    return [x[0] for x in ordre]
+
+def getOrdrePris(OrdreNr):
+    con = sqlite3.connect('teaterDB.db')
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM sqlite_master")
+
+    cursor.execute('''
+                    SELECT Pris
+                    from Ordre
+                    WHERE OrdreID = ?
+                   ''', (OrdreNr,))
+    pris = cursor.fetchone()
+    con.close()
+    return pris[0]

@@ -24,7 +24,8 @@ def printOversikt():
     print("2. Sjekk hvilke forestillingrer som finnes på en dato")
     print("3. Kjøp billett(er) til en forestilling")
     print("4. Vis medskuespillere til en skuespiller")
-    print("5. Avslutt programmet")
+    print("5. Ordreoversikt")
+    print("6. Avslutt programmet")
     print("")
 
 def registrer_bruker():
@@ -96,7 +97,10 @@ def kjop_billetter():
         if billettType == "Ordinær" and valgteBillettTyper[billettType] >= 10: # Gruppe 10 Ordinær
             billettPris = billettPris - 30
         if billettType == "Honnør" and valgteBillettTyper[billettType] >= 10: # Gruppe 10 Honnør
-            billettPris = billettPris - 30
+            if input_stykkeID == "2":
+                billettPris = billettPris - 20
+            else:
+                billettPris = billettPris - 30
 
         totalpris += billettPris * int(valgteBillettTyper[billettType])
         antallBilletter += int(valgteBillettTyper[billettType])
@@ -132,6 +136,7 @@ def kjop_billetter():
                 billett_radNr = input("Skriv inn radnummer: ")
                 billett_seteNr = input("Skriv inn setenummer: ")
                 billett_omrade = input("Skriv inn område: ")
+                print("")
                 billett_salNr = navnOgSal[1]
                 billett_stykkeID = input_stykkeID
                 billett_dato = input_dato
@@ -159,6 +164,18 @@ def kjop_billetter():
         
     print(f"\nTotalpris: {totalpris} kr")
 
+def hent_ordre():
+    telefon = input("Skriv inn telefonnummeret registrert på brukeren din: ")
+    ordre = queries.getKundeOrdre(telefon)
+    if ordre == None:
+        print("Ingen ordre med dette nummeret funnet")
+        return
+    for ordreNr in ordre:
+        print(f"\n----OrdreNr: {ordreNr}----\n")
+        for billett in queries.getBilletterInOrdre(ordreNr):
+            print(f"{billett[0]} - {billett[1]} - {billett[2]} - {billett[3]} - Rad Nr {billett[4]} - Sete Nr {billett[5]} - {billett[6]} kr")
+        print(f"\nTotalpris: {queries.getOrdrePris(ordreNr)} kr\n")
+
 def main():
     printOversikt()
     
@@ -178,6 +195,9 @@ def main():
             vis_medskuespillere()
             print("")
         elif valg == "5":
+            hent_ordre()
+            print("")
+        elif valg == "6":
             print("\nAvslutter programmet\n")
             break
         else:

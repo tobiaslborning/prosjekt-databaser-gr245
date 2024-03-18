@@ -43,7 +43,7 @@ for row in parkett:
             seteID = cursor.fetchone()
             seteID = seteID[0]
             cursor.execute("INSERT INTO Billett(StykkeID,Dato,SeteID,BillettType,OrdreNr,Pris) VALUES (1,?,?,'Ordinær',?,350)", (dato, seteID,ordreNr))
-        
+            
 
 # GALLERI HAR INGEN STOLER, DROPPES
             

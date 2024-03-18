@@ -131,3 +131,66 @@ def generateNewOrderNumber():
     return antall[0]+1
 
 print(generateNewOrderNumber())
+
+def getAkter(skuespillerNavn):
+    """
+    Returns list of tuples with the AktNr and StykkeID of the plays the actor has a role in.
+    """
+    con = sqlite3.connect('teaterDB.db')
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM sqlite_master")
+
+    cursor.execute('''
+                    SELECT DISTINCT AktRoller.AktNr, AktRoller.StykkeID
+                    FROM (
+                        SELECT ts.navn as StykkeNavn, ts.StykkeID, a.AktNr, a.Navn as AktNavn, Rolle.RolleNavn, Rolle.RolleID 
+                        FROM Akt as a
+                        JOIN RolleIAkt as ria
+                        ON a.AktNr = ria.AktNr AND a.StykkeID = ria.StykkeID
+                        NATURAL JOIN Rolle
+                        JOIN TeaterStykke as ts
+                        ON ts.StykkeID = a.StykkeID
+                        ) as AktRoller
+                    JOIN HarRolle as hr
+                    ON AktRoller.RolleID = hr.RolleID
+                    NATURAL JOIN Skuespiller
+                    NATURAL JOIN Ansatt
+                    WHERE Ansatt.Navn = ?
+                    ''',(skuespillerNavn,))
+        
+    akter = cursor.fetchall()
+    con.close()
+    return [x for x in akter]
+
+def getSkuespillereInAkt(aktNr, stykkeID):
+    """
+    Returns list of tuples with the SkuespillerID and SkuespillerNavn of the actors in the play.
+    """
+    con = sqlite3.connect('teaterDB.db')
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM sqlite_master")
+
+    cursor.execute('''
+                    SELECT Navn
+                    FROM (
+                        SELECT ts.navn as StykkeNavn, ts.StykkeID, a.AktNr, a.Navn as AktNavn, Rolle.RolleNavn, Rolle.RolleID 
+                        FROM Akt as a
+                        JOIN RolleIAkt as ria
+                        ON a.AktNr = ria.AktNr AND a.StykkeID = ria.StykkeID
+                        NATURAL JOIN Rolle
+                        JOIN TeaterStykke as ts
+                        ON ts.StykkeID = a.StykkeID
+                        ) as AktRoller
+                    JOIN HarRolle as hr
+                    ON AktRoller.RolleID = hr.RolleID
+                    NATURAL JOIN Skuespiller
+                    NATURAL JOIN Ansatt
+                    WHERE AktNr == ? AND StykkeID = ?
+                    ''',(aktNr, stykkeID))
+        
+    skuespillere = cursor.fetchall()
+    con.close()
+    return [x[0] for x in skuespillere]
+
+print(getAkter("Arturo Scotti"))
+print(getSkuespillereInAkt(1,2))

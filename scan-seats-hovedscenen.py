@@ -10,13 +10,15 @@ with open('seats/hovedscenen.txt', 'r') as file:
 
 # Henter dato
 splitdata = data.split('\n')
-dato = splitdata[0][5:]
+dato = splitdata[0][5:].split('-')
+dato.reverse()
+dato = '-'.join(dato)
+
 
 # Henter parkett
 parkett = splitdata[7:-1]
 parkett.reverse()
 print(dato)
-print(parkett)
 
 # connect to db
 conn = sqlite3.connect('teaterDB.db')
@@ -36,15 +38,11 @@ for row in parkett:
     radNr += 1
     for sete in row:
         seteNr += 1
-        #print('Rad:', radNr, 'Sete:', seteNr, 'Status:', sete)
         if (sete == '1'):
-            print('Rad:', radNr, 'Sete:', seteNr, 'Status:', sete)
             cursor.execute("SELECT SeteID FROM Sete WHERE SalNr = ? AND SeteNr = ? AND RadNr = ? AND Omrade = ?", (1, seteNr, radNr, 'Parkett'))
             seteID = cursor.fetchone()
-            print(seteID)
             seteID = seteID[0]
             cursor.execute("INSERT INTO Billett(StykkeID,Dato,SeteID,BillettType,OrdreNr,Pris) VALUES (1,?,?,'Ordinær',?,350)", (dato, seteID,ordreNr))
-            print('Rad:', radNr, 'Sete:', seteNr, 'Status:', sete)
         
 
 # GALLERI HAR INGEN STOLER, DROPPES

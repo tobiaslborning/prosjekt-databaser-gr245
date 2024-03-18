@@ -618,13 +618,9 @@ def buy9Tickets():
         "INSERT INTO Ordre VALUES (?,'10:00', '03-02-2024', 9, 3150, 4)",(ordreNr,)
     )
 
-    # Count the number of existing tickets
-    cursor.execute("SELECT COUNT(*) FROM Billett")
-    num_tickets = cursor.fetchone()[0]
-
     # legg til billetter
     for i in range(9):
-        cursor.execute("INSERT INTO Billett(StykkeID,Dato,SeteID,BillettType,OrdreNr,Pris) VALUES (1,'03-02-2024',?,'Ordinær',1,350)", (525+i,))
+        cursor.execute("INSERT INTO Billett(StykkeID,Dato,SeteID,BillettType,OrdreNr,Pris) VALUES (1,'03-02-2024',?,'Ordinær',?,350)", (525+i,ordreNr,))
 
     conn.commit()
     conn.close()

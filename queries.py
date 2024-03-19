@@ -118,21 +118,26 @@ def getSkuespillereIStykke():
     
     cursor.execute('''
                     SELECT DISTINCT StykkeNavn, Ansatt.Navn AS SkuespillerNavn, RolleNavn
-FROM (
-    SELECT ts.navn AS StykkeNavn, ts.StykkeID, a.AktNr, a.Navn AS AktNavn, Rolle.RolleNavn, Rolle.RolleID 
-    FROM Akt AS a	
-    JOIN RolleIAkt AS ria ON a.AktNr = ria.AktNr AND a.StykkeID = ria.StykkeID
-    NATURAL JOIN Rolle
-    JOIN TeaterStykke AS ts ON ts.StykkeID = a.StykkeID
-) AS AktRoller
-JOIN HarRolle AS hr ON AktRoller.RolleID = hr.RolleID
-NATURAL JOIN Skuespiller
-NATURAL JOIN Ansatt
-ORDER BY StykkeNavn;
+                    FROM (
+                        SELECT ts.navn AS StykkeNavn, ts.StykkeID, a.AktNr, a.Navn AS AktNavn, Rolle.RolleNavn, Rolle.RolleID 
+                        FROM Akt AS a	
+                        JOIN RolleIAkt AS ria ON a.AktNr = ria.AktNr AND a.StykkeID = ria.StykkeID
+                        NATURAL JOIN Rolle
+                        JOIN TeaterStykke AS ts ON ts.StykkeID = a.StykkeID
+                    ) AS AktRoller
+                    JOIN HarRolle AS hr ON AktRoller.RolleID = hr.RolleID
+                    NATURAL JOIN Skuespiller
+                    NATURAL JOIN Ansatt
+                    ORDER BY StykkeNavn;
                     ''')
     
     info = cursor.fetchall()
     con.close()
+    
+    for row in info:
+        print(f"Stykke: {row[0]}, Skuespiller: {row[1]}, Rolle: {row[2]}")
+
+
     return [x for x in info]
     
 

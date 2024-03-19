@@ -285,6 +285,24 @@ def getDatoByStykkeID(stykkeID):
     con.close()
     return [x[0] for x in dato]
 
+def setOrdreAntallOgPris(ordreNr):
+    con = sqlite3.connect('teaterDB.db')
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM sqlite_master")
+    
+    cursor.execute("SELECT Pris FROM Billett WHERE OrdreNr = ?", (ordreNr))
+    price = cursor.fetchall()
+    total_price = sum(x[0] for x in price)
+    
+    num_rows = len(price)
+
+    
+    cursor.execute("UPDATE Ordre SET Pris = ?, ANtall = ? WHERE OrdreID = ?",(total_price, num_rows, ordreNr))
+    
+    con.close()
+    
+    return total_price, num_rows
+
 def getBillettTyperAndPris(StykkeID):
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()

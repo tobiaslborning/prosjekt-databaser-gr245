@@ -7,7 +7,7 @@ def vis_forestillinger():
     if len(stykker) == 0:
         print("Ingen forestillinger funnet for denne datoen")
         return
-    for stykke in stykker:
+    for stykke in stykker: 
         stykkeID = queries.getTeaterStykkeID(stykke)
         antallSolgt = queries.getSoldSeats(stykkeID, input_dato)
         print(f"{stykke}".ljust(35) + f"|    Antall seter solgt: {len(antallSolgt)}")

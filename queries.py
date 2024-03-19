@@ -48,7 +48,6 @@ def getSeteID(salNr, seteNr, radNr, omrade):
         return None
     return seteID[0]
 
-print(getSeteID(2, 1, 1, "Balkfong"))
 
 def getSoldSeats(stykkeID, dato):
     """
@@ -71,7 +70,6 @@ def getSoldSeats(stykkeID, dato):
     con.close()
     return [x[0] for x in seteID]
 
-print(getSoldSeats("1","03-02-2024"))
 
 def getSoldSeatsWithInfo(stykkeID, dato):
     con = sqlite3.connect('teaterDB.db')
@@ -87,7 +85,6 @@ def getSoldSeatsWithInfo(stykkeID, dato):
     con.close()
     return [x for x in seteID]
 
-print(getSoldSeatsWithInfo(1,"03-02-2024"))
 
 def isSeatSold(stykkeID, dato, seteNr, radNr, omrade):
     """
@@ -114,7 +111,6 @@ def isSeatSold(stykkeID, dato, seteNr, radNr, omrade):
     seteID = getSeteID(salNr[0],seteNr,radNr,omrade)
     return seteID in [x for x in getSoldSeats(stykkeID,dato)]
 
-print(isSeatSold("1","03-02-2024",1,1,"Parkett"))
 
 def getStykkerByDato(dato):
     """
@@ -137,7 +133,6 @@ def getStykkerByDato(dato):
     con.close()
     return [x[0] for x in navn]
 
-print(getStykkerByDato("05-02-2024"))
 
 def generateNewOrderNumber(): 
     con = sqlite3.connect('teaterDB.db')
@@ -148,9 +143,11 @@ def generateNewOrderNumber():
         "SELECT OrdreID FROM Ordre ORDER BY OrdreID DESC LIMIT 1")
     antall = cursor.fetchone()
     con.close()
+
+    if not antall:
+        return 0
     return int(antall[0])+1
 
-print(generateNewOrderNumber())
 
 def getAkter(skuespillerNavn):
     """
@@ -249,7 +246,6 @@ def getMedSkuespillere(skuespillerNavn):
         for akt in medSkuespillere[skuespiller]:
             print(f"{skuespillerNavn} spiller med {skuespiller} i {' og '.join(medSkuespillere[skuespiller])}")
 
-getMedSkuespillere("Tor Ivar Hagen")
 
 def registrerKunde(navn, telefon, addresse):
 
@@ -284,6 +280,24 @@ def getDatoByStykkeID(stykkeID):
     dato = cursor.fetchall()
     con.close()
     return [x[0] for x in dato]
+
+def setOrdreAntallOgPris(ordreNr):
+    con = sqlite3.connect('teaterDB.db')
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM sqlite_master")
+    
+    cursor.execute("SELECT Pris FROM Billett WHERE OrdreNr = ?", (ordreNr))
+    price = cursor.fetchall()
+    total_price = sum(x[0] for x in price)
+    
+    num_rows = len(price)
+
+    
+    cursor.execute("UPDATE Ordre SET Pris = ?, ANtall = ? WHERE OrdreID = ?",(total_price, num_rows, ordreNr))
+    
+    con.close()
+    
+    return total_price, num_rows
 
 def getBillettTyperAndPris(StykkeID):
     con = sqlite3.connect('teaterDB.db')

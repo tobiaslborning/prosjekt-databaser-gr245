@@ -11,7 +11,7 @@ cursor.execute("DELETE FROM Ordre WHERE Antall = ?", (101,))
 
 # Oppretter ordre
 cursor.execute(
-    "INSERT INTO Ordre VALUES (?,'10:00', '18-02-2024', 101, 101, 2)",(ordreNr,)) # pris og antall 100 må endres
+    "INSERT INTO Ordre VALUES (?,'10:00', '18-02-2024', NULL, NULL, 2)",(ordreNr,)) 
 
 # Leser fil
 with open('seats/gamle-scene.txt', 'r') as file:
@@ -61,6 +61,9 @@ def opprettBilett(sted):
 opprettBilett(galleri)
 opprettBilett(balkong)
 opprettBilett(parkett)
+
+
+# Må oppdatere ordre med setOrdreAntallOgPris(ordreNr)            
 
 
 

@@ -42,7 +42,7 @@ def kjop_billetter():
     
     kunde = queries.getKundeByTelefon(telefon)
 
-    if kunde == None:
+    if not kunde:
         print("Ingen bruker med dette telefonnummeret funnet")
         return
     print(f"\nVelkommen {kunde[1]}!\n")
@@ -144,7 +144,7 @@ def kjop_billetter():
                 billett_pris = queries.getPrisByBilletType(input_stykkeID, valgtBillettType)
                 billett_seteID = queries.getSeteID(billett_salNr, billett_seteNr, billett_radNr, billett_omrade)
                 soldSeats = queries.getSoldSeats(input_stykkeID, input_dato)
-
+                
                 if billett_seteID != None and billett_seteID not in soldSeats:
                     queries.createBillett(billett_stykkeID, billett_dato, billett_seteID, valgtBillettType, billett_ordreNr, billett_pris)
                     print(f"\nBillett {billett + 1} av type {valgtBillettType} kjøpt\n")
@@ -167,7 +167,7 @@ def kjop_billetter():
 def hent_ordre():
     telefon = input("Skriv inn telefonnummeret registrert på brukeren din: ")
     ordre = queries.getKundeOrdre(telefon)
-    if ordre == None:
+    if not ordre:
         print("Ingen ordre med dette nummeret funnet")
         return
     for ordreNr in ordre:

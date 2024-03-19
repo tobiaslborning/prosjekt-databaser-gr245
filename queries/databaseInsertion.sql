@@ -110,8 +110,8 @@ CREATE TABLE Ordre (
     OrdreID INTEGER PRIMARY KEY, -- BYTTE TIL INTEGER for AutoIncrement
     KjopsTid TIME NOT NULL,
     KjopsDato DATE NOT NULL,
-    Antall INT NOT NULL,
-    Pris INT NOT NULL, 
+    Antall INT,
+    Pris INT, 
     KundeNr INT,
     FOREIGN KEY (KundeNr) REFERENCES Kunde(KundeNr) ON DELETE CASCADE ON UPDATE CASCADE
 );

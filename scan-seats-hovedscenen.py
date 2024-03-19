@@ -29,7 +29,7 @@ cursor.execute("DELETE FROM Ordre WHERE Antall = ?", (100,))
 
 # Oppretter ordre
 cursor.execute(
-    "INSERT INTO Ordre VALUES (?,'10:00', '18-02-2024', 100, 100, 4)",(ordreNr,)) # pris og antall 100 må endres
+    "INSERT INTO Ordre VALUES (?,'10:00', '18-02-2024', NULL, NULL, 4)",(ordreNr,)) 
 
 # Oppretter billetter
 radNr = 0
@@ -43,7 +43,8 @@ for row in parkett:
             seteID = cursor.fetchone()
             seteID = seteID[0]
             cursor.execute("INSERT INTO Billett(StykkeID,Dato,SeteID,BillettType,OrdreNr,Pris) VALUES (1,?,?,'Ordinær',?,350)", (dato, seteID,ordreNr))
-            
+
+# Må oppdatere ordre med setOrdreAntallOgPris(ordreNr)            
 
 # GALLERI HAR INGEN STOLER, DROPPES
             

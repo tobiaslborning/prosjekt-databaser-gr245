@@ -607,23 +607,23 @@ def addSalAndSete():
         seteID += 1
         cursor.execute("INSERT INTO Sete VALUES (?,2,?,?,'Galleri')",(seteID, seteNr,3))
 
-def buy9Tickets():
-    # opprett ordre
-    ordreNr = queries.generateNewOrderNumber()
+# def buy9Tickets():
+#     # opprett ordre
+#     ordreNr = queries.generateNewOrderNumber()
 
-    conn = sqlite3.connect('teaterDB.db')
-    cursor = conn.cursor()
+#     conn = sqlite3.connect('teaterDB.db')
+#     cursor = conn.cursor()
 
-    cursor.execute(
-        "INSERT INTO Ordre VALUES (?,'10:00', '03-02-2024', 9, 3150, 4)",(ordreNr,)
-    )
+#     cursor.execute(
+#         "INSERT INTO Ordre VALUES (?,'10:00', '03-02-2024', 9, 3150, 4)",(ordreNr,)
+#     )
 
-    # legg til billetter
-    for i in range(9):
-        cursor.execute("INSERT INTO Billett(StykkeID,Dato,SeteID,BillettType,OrdreNr,Pris) VALUES (1,'03-02-2024',?,'Ordinær',?,350)", (525+i,ordreNr,))
+#     # legg til billetter
+#     for i in range(9):
+#         cursor.execute("INSERT INTO Billett(StykkeID,Dato,SeteID,BillettType,OrdreNr,Pris) VALUES (1,'03-02-2024',?,'Ordinær',?,350)", (525+i,ordreNr,))
 
-    conn.commit()
-    conn.close()
+#     conn.commit()
+#     conn.close()
 
 def upload():
     addSalAndSete() 
@@ -644,4 +644,4 @@ upload()
 conn.commit()
 conn.close()
 
-buy9Tickets()
+

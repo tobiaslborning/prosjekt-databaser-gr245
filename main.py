@@ -1,4 +1,9 @@
 import queries
+import upload
+import scan_seats_gamle_scene
+import scan_seats_hovedscenen
+
+
 
 def vis_forestillinger():
     input_dato = input("Skriv inn datoen du ønsker å se forestillinger for (dd-mm-yyyy): ")
@@ -20,13 +25,55 @@ def vis_medskuespillere():
 def printOversikt():
     print("--------------------------------------------------------")
     print("Hva ønsker du å gjøre?")
-    print("1. Registrer ny bruker")
-    print("2. Sjekk hvilke forestillingrer som finnes på en dato")
-    print("3. Kjøp billett(er) til en forestilling")
-    print("4. Vis medskuespillere til en skuespiller")
-    print("5. Ordreoversikt")
-    print("6. Avslutt programmet")
+    print("1. Utføre brukerhistorier")
+    print("2. Kjøp billett(er) til en forestilling")
+    print("3. Avslutte programmet")
     print("")
+    
+def printBrukerHistorier():
+    print("--------------------------------------------------------")
+    print("Hvilken brukerhistorie ønsker du å teste?")
+    print("1. Laste opp all data til databaser")
+    print("2. Fylle inn allerede kjøpt billetter")
+    print("3. Kjøp 9 billetter til Størst av Alt er Kjærligheten")
+    print("4. Sjekk hvilke forestillingrer som finnes på en dato")
+    print("5. Sjekk hvilke skuespillere som er med i et stykke")
+    print("6. Sjekk hvilke forestillinger som har solgt best")
+    print("7. Sjekk hvilke skuespillere som har spilt i samme akt")
+    print("")
+    while True:
+        videre = int(input("Skriv inn tall på brukerhistorie du ønsker å teste: "))
+        if videre == 1:
+            upload.upload()
+            break
+        elif videre == 2:
+            scan_seats_gamle_scene.scan_seats_gamle_scene()
+            scan_seats_hovedscenen.scan_seats_hovedscenen()
+            break
+        elif videre == 3:
+            oppg3_kjop9Billetter()
+            break
+        elif videre == 4:
+            vis_forestillinger()
+            break
+        elif videre == 5:
+            vis_skuespillere_i_stykke()
+            break
+        elif videre == 6:
+            vis_flest_forestillinger_solgt()
+        elif videre == 7:
+            vis_medskuespillere()
+            break
+        else:
+            printBrukerHistorier()
+            
+def vis_flest_forestillinger_solgt():
+    print(f"\n----Forestilling som har solgt best----\n")
+    queries.getForestillingSolgtBest()
+
+def vis_skuespillere_i_stykke():
+    print(f"\n----Skuespillere----\n")
+    queries.getSkuespillereIStykke()
 
 def registrer_bruker():
     print("Registrer ny bruker\n")
@@ -35,6 +82,13 @@ def registrer_bruker():
     addresse = input("Addresse: ")
     queries.registrerKunde(navn, telefon, addresse)
     print(f"\n{navn} registrert \n")
+    
+def oppg3_kjop9Billetter():
+    ordreNr = queries.generateNewOrderNumber()
+    queries.kjop9Billetter(ordreNr)
+    
+    
+    
 
 def kjop_billetter():
     print("Dersom du ikke er registrert er du nødt til å registrere deg først")
@@ -180,24 +234,16 @@ def main():
     printOversikt()
     
     while True:
+        printOversikt()
         valg = input(
             "\nSkriv inn tallet til ønsket handling: ")
         if valg == "1":
-            registrer_bruker()
+            printBrukerHistorier()
             print("")
         elif valg == "2":
-            vis_forestillinger()
-            print("")
-        elif valg == "3":
             kjop_billetter()
             print("")
-        elif valg == "4":
-            vis_medskuespillere()
-            print("")
-        elif valg == "5":
-            hent_ordre()
-            print("")
-        elif valg == "6":
+        elif valg == "3":
             print("\nAvslutter programmet\n")
             break
         else:

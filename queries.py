@@ -342,7 +342,7 @@ def kjop9Billetter(ordreNr):
     radNr = 1
     for seteNr in range(1,10):
         seteID = getSeteID(2, seteNr, radNr, omrade)
-        
+
         if seteID in takenSeats:
             print(f"\nSete {seteNr} på rad {radNr} i området {omrade} er opptatt")
             print(f"Denne brukerhistorien er forutsatt at plassene er ledige")
@@ -540,7 +540,6 @@ def updateOrdrePrisAndAntall(ordreNr):
     cursor.execute("SELECT COUNT(*) FROM Billett WHERE OrdreNr = ? AND BillettType = ?", (ordreNr,"Ordinær"))
     antOrdinar = cursor.fetchone()
     antOrdinar = antOrdinar[0]
-    print(antOrdinar)
     if antOrdinar >= 10:
         cursor.execute("SELECT Pris FROM PrisTabell WHERE StykkeID = ? AND BillettType = ?", (stykkeID,"Ordinær10"))
         pris = cursor.fetchone()

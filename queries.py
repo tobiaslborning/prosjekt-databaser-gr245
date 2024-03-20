@@ -380,9 +380,9 @@ def getForestillingSolgtBest():
                     ON stykke.StykkeID = b.StykkeID AND oppsettning.dato = b.Dato
                     ORDER BY billetterSolgt DESC
                    ''')
-    info = cursor.fetchone()
+    info = cursor.fetchall()
     con.close()
-    return info
+    return [x for x in info]
 
 def getBillettTyperAndPris(StykkeID):
     con = sqlite3.connect('teaterDB.db')
@@ -521,7 +521,6 @@ def updateOrdrePrisAndAntall(ordreNr):
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
-    print(ordreNr)
     cursor.execute("SELECT StykkeID FROM Billett WHERE OrdreNr = ?", (ordreNr,))
     billett = cursor.fetchone()
     stykkeID = billett[0]
@@ -530,7 +529,6 @@ def updateOrdrePrisAndAntall(ordreNr):
     cursor.execute("SELECT COUNT(*) FROM Billett WHERE OrdreNr = ? AND BillettType = ?", (ordreNr,"Honnør"))
     antHonnor = cursor.fetchone()
     antHonnor = antHonnor[0]
-    print(antHonnor)
     # prisjustering basert på PrisTabell
     if antHonnor >= 10:
         cursor.execute("SELECT Pris FROM PrisTabell WHERE StykkeID = ? AND BillettType = ?", (stykkeID,"Honnør10"))

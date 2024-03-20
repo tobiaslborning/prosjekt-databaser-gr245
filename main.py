@@ -65,11 +65,15 @@ def printBrukerHistorier():
             printBrukerHistorier()
             
 def vis_flest_forestillinger_solgt():
-    print(f"\n----Forestilling som har solgt best----\n")
-    forestilling = queries.getForestillingSolgtBest()
-    if forestilling != None:
-        print(f"{forestilling[0]} - {forestilling[1]} billetter solgt: {forestilling[2]}")
+    print("\n---- Forestillinger som har solgt best ----\n")
+    forestillinger = queries.getForestillingSolgtBest()
+    if forestillinger:
+        for forestilling in forestillinger:
+            print(f"{forestilling[0]} - {forestilling[1]} billetter solgt: {forestilling[2]}")
+    else:
+        print("Ingen resultater funnet.")
     print("\n")
+
 
 def vis_skuespillere_i_stykke():
     input_stykke = input("Skriv inn navnet på stykket du ønsker å se skuespillere for: ")

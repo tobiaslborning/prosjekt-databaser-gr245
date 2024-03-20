@@ -14,7 +14,7 @@ FROM
                     ON AktRoller.RolleID = hr.RolleID
                     NATURAL JOIN Skuespiller
                     NATURAL JOIN Ansatt
-                    WHERE Ansatt.Navn = "Arturo Scotti"
+                    WHERE Ansatt.Navn = "Ingunn Beate Strige Øyen" -- Bytt ut med ? i programmet
 ) as AktTilSkuespiller
 JOIN
 (SELECT DISTINCT Navn, Aktnr, StykkeID

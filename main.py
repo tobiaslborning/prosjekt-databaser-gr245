@@ -1,9 +1,4 @@
 import queries
-import upload
-import scan_seats_gamle_scene
-import scan_seats_hovedscenen
-
-
 
 def vis_forestillinger():
     input_dato = input("Skriv inn datoen du ønsker å se forestillinger for (dd-mm-yyyy): ")
@@ -20,21 +15,23 @@ def vis_forestillinger():
 def vis_medskuespillere():
     input_skuespiller = input("Skriv inn navnet på skuespilleren du ønsker å se medskuespillere for: ")
     print(f"\n----Medskuespillere til {input_skuespiller}----\n")
-    queries.getMedSkuespillere(input_skuespiller)
+    queries.getOppg7(input_skuespiller)
 
 def printOversikt():
     print("--------------------------------------------------------")
     print("Hva ønsker du å gjøre?")
     print("1. Utføre brukerhistorier")
-    print("2. Kjøp billett(er) til en forestilling")
-    print("3. Avslutte programmet")
+    print("2. Registrere ny bruker")
+    print("3. Kjøp billett(er) til en forestilling")
+    print("4. Hent ordre")
+    print("5. Avslutte programmet")
     print("")
     
 def printBrukerHistorier():
     print("--------------------------------------------------------")
     print("Hvilken brukerhistorie ønsker du å teste?")
-    print("1. Laste opp all data til databaser")
-    print("2. Fylle inn allerede kjøpt billetter")
+    print("1. Laste opp all data til databaser  [Fullført ved initialisering av programmet]")
+    print("2. Fylle inn allerede kjøpt billetter  [Fullført ved initialisering av programmet]")
     print("3. Kjøp 9 billetter til Størst av Alt er Kjærligheten")
     print("4. Sjekk hvilke forestillingrer som finnes på en dato")
     print("5. Sjekk hvilke skuespillere som er med i et stykke")
@@ -44,11 +41,10 @@ def printBrukerHistorier():
     while True:
         videre = int(input("Skriv inn tall på brukerhistorie du ønsker å teste: "))
         if videre == 1:
-            upload.upload()
+            print("Info står i readme.md")
             break
         elif videre == 2:
-            scan_seats_gamle_scene.scan_seats_gamle_scene()
-            scan_seats_hovedscenen.scan_seats_hovedscenen()
+            print("Infor står i readme.md")
             break
         elif videre == 3:
             oppg3_kjop9Billetter()
@@ -61,6 +57,7 @@ def printBrukerHistorier():
             break
         elif videre == 6:
             vis_flest_forestillinger_solgt()
+            break
         elif videre == 7:
             vis_medskuespillere()
             break
@@ -69,11 +66,15 @@ def printBrukerHistorier():
             
 def vis_flest_forestillinger_solgt():
     print(f"\n----Forestilling som har solgt best----\n")
-    queries.getForestillingSolgtBest()
+    forestilling = queries.getForestillingSolgtBest()
+    if forestilling != None:
+        print(f"{forestilling[0]} - {forestilling[1]} billetter solgt: {forestilling[2]}")
+    print("\n")
 
 def vis_skuespillere_i_stykke():
+    input_stykke = input("Skriv inn navnet på stykket du ønsker å se skuespillere for: ")
     print(f"\n----Skuespillere----\n")
-    queries.getSkuespillereIStykke()
+    queries.getSkuespillereIStykke(input_stykke)
 
 def registrer_bruker():
     print("Registrer ny bruker\n")
@@ -84,11 +85,19 @@ def registrer_bruker():
     print(f"\n{navn} registrert \n")
     
 def oppg3_kjop9Billetter():
+
     ordreNr = queries.generateNewOrderNumber()
     queries.kjop9Billetter(ordreNr)
-    
-    
-    
+
+    try:
+        print(f"\n----OrdreNr: {ordreNr}----\n")
+        for billett in queries.getBilletterInOrdre(ordreNr):
+            print(f"{billett[0]} - {billett[1]} - {billett[2]} - {billett[3]} - Rad Nr {billett[4]} - Sete Nr {billett[5]} - {billett[6]} kr")
+        print(f"\nTotalpris: {queries.getOrdrePrisAndAntall(ordreNr)[0]} kr\n")
+    except Exception as e:
+        print("En feil oppstod under kjøp av billetter, billettene er allerede kjøpt")
+        queries.deleteOrdre(ordreNr)
+        print(f"OrdreNr {ordreNr} slettet")
 
 def kjop_billetter():
     print("Dersom du ikke er registrert er du nødt til å registrere deg først")
@@ -124,7 +133,8 @@ def kjop_billetter():
     print(f"\n----Billettyper----\n")
     billettTyper = queries.getBillettTyperAndPris(input_stykkeID)
     for billettType in billettTyper:
-        print(f"{billettType[0]} - {billettType[1]} kr")
+        if billettType[0] != "Honnør10" and billettType[0] != "Ordinær10":
+            print(f"{billettType[0]} - {billettType[1]} kr")
     print("")
 
     while True:
@@ -143,30 +153,11 @@ def kjop_billetter():
         if fortsett.lower() == "n":
             break
 
-    totalpris = 0
-    antallBilletter = 0
-    for billettType in valgteBillettTyper.keys():
-        billettPris = int(queries.getPrisByBilletType(input_stykkeID, billettType))
-
-        if billettType == "Ordinær" and valgteBillettTyper[billettType] >= 10: # Gruppe 10 Ordinær
-            billettPris = billettPris - 30
-        if billettType == "Honnør" and valgteBillettTyper[billettType] >= 10: # Gruppe 10 Honnør
-            if input_stykkeID == "2":
-                billettPris = billettPris - 20
-            else:
-                billettPris = billettPris - 30
-
-        totalpris += billettPris * int(valgteBillettTyper[billettType])
-        antallBilletter += int(valgteBillettTyper[billettType])
-    
-    print(f"\nTotalpris: {totalpris} kr")
-    print(f"Antall billetter: {antallBilletter}\n")
-
     bekreft = input("Bekreft kjøp av billetter og fortsett til setevalg? (J/N): ")
     if bekreft.lower() == "n":
         return
     
-    ordreNr = queries.createOrdre(antallBilletter, totalpris, kunde[0])
+    ordreNr = queries.createOrdre(kunde[0])
 
     navnOgSal = queries.getStykkeAndSalByID(input_stykkeID)
 
@@ -175,7 +166,7 @@ def kjop_billetter():
     print("")
     valg = input("Skriv inn tallet til ønsket handling: ")
     if valg == "1":
-        print(f"\n----Opptatte seter for {navnOgSal[0]} på {input_dato} i sal {navnOgSal[1]}----\n")
+        print(f"\n----Vis opptatte seter for {navnOgSal[0]} på {input_dato} i sal {navnOgSal[1]}----\n")
         for seteInfo in queries.getSoldSeatsWithInfo(input_stykkeID, input_dato):
             print(f"Rad {seteInfo[2]} Sete {seteInfo[3]} Område {seteInfo[4]}")
     
@@ -209,15 +200,17 @@ def kjop_billetter():
                     if valg == "1":
                         queries.deleteOrdre(ordreNr)
                         return
-                    continue
+                    
+    queries.updateOrdrePrisAndAntall(ordreNr)
                     
     print(f"\nOrdre {ordreNr} fullført\n")
-    print(f"---------Dine billetter---------\n")
+    ordreOgAntall = queries.getOrdrePrisAndAntall(ordreNr)
+    print(f"Totalpris: {ordreOgAntall[0]} kr")
+    print(f"Antall billetter: {ordreOgAntall[1]}")
+    print(f"\n---------Dine billetter---------\n")
     for billett in queries.getBilletterInOrdre(ordreNr):
         print(f"{billett[0]} - {billett[1]} - {billett[2]} - {billett[3]} - Rad Nr {billett[4]} - Sete Nr {billett[5]} - {billett[6]} kr")
         
-    print(f"\nTotalpris: {totalpris} kr")
-
 def hent_ordre():
     telefon = input("Skriv inn telefonnummeret registrert på brukeren din: ")
     ordre = queries.getKundeOrdre(telefon)
@@ -225,14 +218,13 @@ def hent_ordre():
         print("Ingen ordre med dette nummeret funnet")
         return
     for ordreNr in ordre:
+        queries.updateOrdrePrisAndAntall(ordreNr)
         print(f"\n----OrdreNr: {ordreNr}----\n")
         for billett in queries.getBilletterInOrdre(ordreNr):
             print(f"{billett[0]} - {billett[1]} - {billett[2]} - {billett[3]} - Rad Nr {billett[4]} - Sete Nr {billett[5]} - {billett[6]} kr")
-        print(f"\nTotalpris: {queries.getOrdrePris(ordreNr)} kr\n")
+        print(f"\nTotalpris: {queries.getOrdrePrisAndAntall(ordreNr)[0]} kr\n")
 
 def main():
-    printOversikt()
-    
     while True:
         printOversikt()
         valg = input(
@@ -241,9 +233,15 @@ def main():
             printBrukerHistorier()
             print("")
         elif valg == "2":
-            kjop_billetter()
+            registrer_bruker()
             print("")
         elif valg == "3":
+            kjop_billetter()
+            print("")
+        elif valg == "4":
+            hent_ordre()
+            print("")
+        elif valg == "5":
             print("\nAvslutter programmet\n")
             break
         else:

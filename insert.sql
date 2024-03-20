@@ -112,7 +112,7 @@ CREATE TABLE Ordre (
     KjopsDato DATE NOT NULL,
     Antall INT,
     Pris INT, 
-    KundeNr INT,
+    KundeNr INT NOT NULL,
     FOREIGN KEY (KundeNr) REFERENCES Kunde(KundeNr) ON DELETE CASCADE ON UPDATE CASCADE
 );
 

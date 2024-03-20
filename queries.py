@@ -48,7 +48,6 @@ def getSeteID(salNr, seteNr, radNr, omrade):
         return None
     return seteID[0]
 
-
 def getSoldSeats(stykkeID, dato):
     """
     Retrieves the sold seats from the database based on the provided parameters.
@@ -70,7 +69,6 @@ def getSoldSeats(stykkeID, dato):
     con.close()
     return [x[0] for x in seteID]
 
-
 def getSoldSeatsWithInfo(stykkeID, dato):
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
@@ -84,7 +82,6 @@ def getSoldSeatsWithInfo(stykkeID, dato):
     seteID = cursor.fetchall()
     con.close()
     return [x for x in seteID]
-
 
 def isSeatSold(stykkeID, dato, seteNr, radNr, omrade):
     """
@@ -111,7 +108,7 @@ def isSeatSold(stykkeID, dato, seteNr, radNr, omrade):
     seteID = getSeteID(salNr[0],seteNr,radNr,omrade)
     return seteID in [x for x in getSoldSeats(stykkeID,dato)]
 
-def getSkuespillereIStykke():
+def getSkuespillereIStykke(stykkeNavn):
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
@@ -128,19 +125,17 @@ def getSkuespillereIStykke():
                     JOIN HarRolle AS hr ON AktRoller.RolleID = hr.RolleID
                     NATURAL JOIN Skuespiller
                     NATURAL JOIN Ansatt
-                    ORDER BY StykkeNavn;
-                    ''')
+                    Where StykkeNavn = ?;
+                    ''',(stykkeNavn,))
     
     info = cursor.fetchall()
     con.close()
-    
+    if info == None:
+        print(f"Ingen skuespillere i {stykkeNavn} i databasen")
+        return
     for row in info:
-        print(f"Stykke: {row[0]}, Skuespiller: {row[1]}, Rolle: {row[2]}")
-
-
-    return [x for x in info]
+        print(f"{row[1]}".ljust(30) + f"spiller rollen {row[2]}".ljust(50) + f"i {row[0]}")
     
-
 def getStykkerByDato(dato):
     """
     Retrieves the plays from the database based on the provided date.
@@ -162,7 +157,6 @@ def getStykkerByDato(dato):
     con.close()
     return [x[0] for x in navn]
 
-
 def generateNewOrderNumber(): 
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
@@ -176,7 +170,6 @@ def generateNewOrderNumber():
     if not antall:
         return 1
     return int(antall[0])+1
-
 
 def getAkter(skuespillerNavn):
     """
@@ -275,7 +268,6 @@ def getMedSkuespillere(skuespillerNavn):
         for akt in medSkuespillere[skuespiller]:
             print(f"{skuespillerNavn} spiller med {skuespiller} i {' og '.join(medSkuespillere[skuespiller])}")
 
-
 def registrerKunde(navn, telefon, addresse):
 
     con = sqlite3.connect('teaterDB.db')
@@ -329,18 +321,46 @@ def setOrdreAntallOgPris(ordreNr):
     return total_price, num_rows
 
 def kjop9Billetter(ordreNr):
+    # Henter opptatte
+    takenSeats = getSoldSeats(1, '06-02-2024')
+
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
 
+    print("\nDenne funksjonen kjøper 9 billetter til Størst av alt er kjærligheten, dato 06-02-2024")
+    print("Forestillingen vises i Sal nr 2; Gamle Scene")
+    print("Billettene kjøpes til området Parkett, rad 1, sete 1-9")
+    print("Denne vil lage en ordre med 9 billetter til kunden Ola Nordmann med kundeNr 4")
+    print("Det er også mulig å kjøpe billetter ved å bruke programmet")
+    print("")
+
     cursor.execute(
-        "INSERT INTO Ordre VALUES (?,'10:00', '03-02-2024', 9, 3150, 4)",(ordreNr,)
+        "INSERT INTO Ordre VALUES (?,'10:00', '02-02-2024', NULL, NULL, 4)",(ordreNr,) # Vilkårlig dato og klokkelsett
     )
+    omrade = "Parkett"
+    radNr = 1
+    for seteNr in range(1,10):
+        seteID = getSeteID(2, seteNr, radNr, omrade)
+        
+        if seteID in takenSeats:
+            print(f"\nSete {seteNr} på rad {radNr} i området {omrade} er opptatt")
+            print(f"Denne brukerhistorien er forutsatt at plassene er ledige")
+            print(f"\nLast inn data på nytt ved å avslutte programmet og skriv")
+            print("python3 upload.py\n")
+            con.close()
+            return
+        # henter pris
+        cursor.execute("SELECT Pris FROM PrisTabell WHERE StykkeID = 1 AND BillettType = 'Ordinær'")
+        pris = cursor.fetchone()
+        pris = pris[0]
+        cursor.execute("INSERT INTO Billett(StykkeID,Dato,SeteID,BillettType,OrdreNr,Pris) VALUES (1,'06-02-2024',?,'Ordinær',?,?)", (seteID,ordreNr,pris))
 
-    for i in range(9):
-        cursor.execute("INSERT INTO Billett(StykkeID,Dato,SeteID,BillettType,OrdreNr,Pris) VALUES (1,'03-02-2024',?,'Ordinær',?,350)", (525+i,ordreNr,))
-
+    con.commit()
     con.close()
+
+    updateOrdrePrisAndAntall(ordreNr)
+
     return ordreNr
     
 def getForestillingSolgtBest():
@@ -360,11 +380,9 @@ def getForestillingSolgtBest():
                     ON stykke.StykkeID = b.StykkeID AND oppsettning.dato = b.Dato
                     ORDER BY billetterSolgt DESC
                    ''')
-    info = cursor.fetchall()
+    info = cursor.fetchone()
     con.close()
-    return [x for x in info]
-
-    
+    return info
 
 def getBillettTyperAndPris(StykkeID):
     con = sqlite3.connect('teaterDB.db')
@@ -387,7 +405,7 @@ def getPrisByBilletType(StykkeID, billettType):
     con.close()
     return pris[0]
 
-def createOrdre(antall, totalpris, kundenr):
+def createOrdre(kundenr):
 
     ordreNr = generateNewOrderNumber()
 
@@ -399,7 +417,7 @@ def createOrdre(antall, totalpris, kundenr):
     date = datetime.datetime.now().strftime("%d-%m-%Y")
 
     cursor.execute(
-        "INSERT INTO Ordre VALUES (?,?,?,?,?,?)", (ordreNr, time, date, antall, totalpris, kundenr))
+        "INSERT INTO Ordre VALUES (?,?,?,NULL,NULL,?)", (ordreNr, time, date, kundenr))
     
     con.commit()
     con.close()
@@ -499,16 +517,114 @@ def getKundeOrdre(telefon):
 
     return [x[0] for x in ordre]
 
-def getOrdrePris(OrdreNr):
+def updateOrdrePrisAndAntall(ordreNr):
+    con = sqlite3.connect('teaterDB.db')
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM sqlite_master")
+    print(ordreNr)
+    cursor.execute("SELECT StykkeID FROM Billett WHERE OrdreNr = ?", (ordreNr,))
+    billett = cursor.fetchone()
+    stykkeID = billett[0]
+
+    # Grupperabatt Honnør
+    cursor.execute("SELECT COUNT(*) FROM Billett WHERE OrdreNr = ? AND BillettType = ?", (ordreNr,"Honnør"))
+    antHonnor = cursor.fetchone()
+    antHonnor = antHonnor[0]
+    print(antHonnor)
+    # prisjustering basert på PrisTabell
+    if antHonnor >= 10:
+        cursor.execute("SELECT Pris FROM PrisTabell WHERE StykkeID = ? AND BillettType = ?", (stykkeID,"Honnør10"))
+        pris = cursor.fetchone()
+        pris = pris[0]
+        cursor.execute("UPDATE Billett SET Pris = ? WHERE OrdreNr = ? AND BillettType = ?", (pris, ordreNr, "Honnør"))
+
+    # Grupperabatt Ordinær
+    cursor.execute("SELECT COUNT(*) FROM Billett WHERE OrdreNr = ? AND BillettType = ?", (ordreNr,"Ordinær"))
+    antOrdinar = cursor.fetchone()
+    antOrdinar = antOrdinar[0]
+    print(antOrdinar)
+    if antOrdinar >= 10:
+        cursor.execute("SELECT Pris FROM PrisTabell WHERE StykkeID = ? AND BillettType = ?", (stykkeID,"Ordinær10"))
+        pris = cursor.fetchone()
+        pris = pris[0]
+        cursor.execute("UPDATE Billett SET Pris = ? WHERE OrdreNr = ? AND BillettType = ?", (pris, ordreNr, "Ordinær"))
+    
+    # regner totalpris
+    cursor.execute("SELECT SUM(Pris) FROM Billett WHERE OrdreNr = ?", (ordreNr,))
+    totalpris = cursor.fetchone()
+    totalpris = totalpris[0]
+
+    # regner antall
+    cursor.execute("SELECT COUNT(*) FROM Billett WHERE OrdreNr = ?", (ordreNr,))
+    antall = cursor.fetchone()
+    antall = antall[0]
+
+    cursor.execute("UPDATE Ordre SET Pris = ?, Antall = ? WHERE OrdreID = ?",(totalpris, antall, ordreNr))
+    
+
+    con.commit()
+    con.close()
+
+def getOrdrePrisAndAntall(ordreNr):
+
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
 
-    cursor.execute('''
-                    SELECT Pris
-                    from Ordre
-                    WHERE OrdreID = ?
-                   ''', (OrdreNr,))
-    pris = cursor.fetchone()
+    cursor.execute("SELECT Pris, Antall FROM Ordre WHERE OrdreID = ?", (ordreNr,))
+    info = cursor.fetchone()
+
     con.close()
-    return pris[0]
+    return info
+
+def getOppg7(skuespillerNavn):
+    con = sqlite3.connect('teaterDB.db')
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM sqlite_master")
+
+    cursor.execute( '''
+                    SELECT AktTilSkuespiller.Navn, SkuespillereInAkt.Navn, AktTilSkuespiller.AktNr, AktTilSkuespiller.StykkeNavn
+                    FROM
+                    (SELECT DISTINCT AktRoller.AktNr, AktRoller.StykkeID, AktRoller.StykkeNavn, Ansatt.Navn
+                                        FROM (
+                                            SELECT ts.navn as StykkeNavn, ts.StykkeID, a.AktNr, a.Navn as AktNavn, Rolle.RolleNavn, Rolle.RolleID 
+                                            FROM Akt as a
+                                            JOIN RolleIAkt as ria
+                                            ON a.AktNr = ria.AktNr AND a.StykkeID = ria.StykkeID
+                                            NATURAL JOIN Rolle
+                                            JOIN TeaterStykke as ts
+                                            ON ts.StykkeID = a.StykkeID
+                                            ) as AktRoller
+                                        JOIN HarRolle as hr
+                                        ON AktRoller.RolleID = hr.RolleID
+                                        NATURAL JOIN Skuespiller
+                                        NATURAL JOIN Ansatt
+                                        WHERE Ansatt.Navn = ? -- Bytt ut med ? i programmet
+                    ) as AktTilSkuespiller
+                    JOIN
+                    (SELECT DISTINCT Navn, Aktnr, StykkeID
+                                        FROM (
+                                            SELECT ts.navn as StykkeNavn, ts.StykkeID, a.AktNr, a.Navn as AktNavn, Rolle.RolleNavn, Rolle.RolleID 
+                                            FROM Akt as a
+                                            JOIN RolleIAkt as ria
+                                            ON a.AktNr = ria.AktNr AND a.StykkeID = ria.StykkeID
+                                            NATURAL JOIN Rolle
+                                            JOIN TeaterStykke as ts
+                                            ON ts.StykkeID = a.StykkeID
+                                            ) as AktRoller
+                                        JOIN HarRolle as hr
+                                        ON AktRoller.RolleID = hr.RolleID
+                                        NATURAL JOIN Skuespiller
+                                        NATURAL JOIN Ansatt
+                    ) as SkuespillereInAkt
+                    ON AktTilSkuespiller.AktNr = SkuespillereInAkt.AktNr AND AktTilSkuespiller.StykkeID = SkuespillereInAkt.StykkeID
+                    WHERE SkuespillereInAkt.Navn != AktTilSkuespiller.Navn -- Fjern spiller med seg selv.
+                    ''',(skuespillerNavn,))
+    info = cursor.fetchall()
+    if info == None:
+        print(f"{skuespillerNavn} spiller ikke med noen andre skuespillere i databasen")
+        return
+    for row in info:
+        print(f"{row[0]} spiller med " + f"{row[1]}".ljust(30) + f"i akt {row[2]} i {row[3]}")
+    con.close()
+    return info

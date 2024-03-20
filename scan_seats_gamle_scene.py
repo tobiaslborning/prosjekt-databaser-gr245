@@ -3,17 +3,7 @@ import queries
 
 def scan_seats_gamle_scene():
 
-    ordreNr = queries.generateNewOrderNumber()
-
-    conn = sqlite3.connect('teaterDB.db')
-    cursor = conn.cursor()
-
-    # Sletter Ordre
-    cursor.execute("DELETE FROM Ordre WHERE Antall = ?", (101,))
-
-    # Oppretter ordre
-    cursor.execute(
-        "INSERT INTO Ordre VALUES (?,'10:00', '18-02-2024', NULL, NULL, 2)",(ordreNr,)) 
+    
 
     # Leser fil
     with open('seats/gamle-scene.txt', 'r') as file:
@@ -24,7 +14,6 @@ def scan_seats_gamle_scene():
     dato = splitdata[0][5:].split('-')
     dato.reverse()
     dato = '-'.join(dato)
-
 
     # Henter galleri
     galleri = splitdata[2:5]
@@ -38,6 +27,20 @@ def scan_seats_gamle_scene():
     parkett = splitdata[11:21]
     parkett.reverse()
 
+    salNr = 2
+    stykkeID = 1
+    ordreNr = queries.generateNewOrderNumber()
+    takenSeatIDs = queries.getSoldSeats(stykkeID, dato)
+
+    conn = sqlite3.connect('teaterDB.db')
+    cursor = conn.cursor()
+
+    # Oppretter ordre
+    cursor.execute(
+        "INSERT INTO Ordre VALUES (?,'10:02', '18-02-2024', NULL, NULL, 4)",(ordreNr,)) 
+
+    global success
+    success = True
     # Oppretter billetter
     def opprettBilett(sted):
         num_items = len(sted)
@@ -54,20 +57,30 @@ def scan_seats_gamle_scene():
             for sete in row:
                 seteNr += 1
                 if (sete == '1'):
-                    cursor.execute("SELECT SeteID FROM Sete WHERE SalNr = ? AND SeteNr = ? AND RadNr = ? AND Omrade = ?", (2, seteNr, radNr, sal))
+                    cursor.execute("SELECT SeteID FROM Sete WHERE SalNr = ? AND SeteNr = ? AND RadNr = ? AND Omrade = ?", (salNr, seteNr, radNr, sal))
                     seteID = cursor.fetchone()
-                    print(seteID)
                     seteID = seteID[0]
-                    cursor.execute("INSERT INTO Billett(StykkeID,Dato,SeteID,BillettType,OrdreNr,Pris) VALUES (1,?,?,'Ordinær',?,350)", (dato, seteID,ordreNr))
+                    if seteID not in takenSeatIDs:
+                        cursor.execute("INSERT INTO Billett(StykkeID,Dato,SeteID,BillettType,OrdreNr,Pris) VALUES (1,?,?,'Ordinær',?,350)", (dato, seteID,ordreNr))
+                    else:
+                        global success
+                        success = False
 
     opprettBilett(galleri)
     opprettBilett(balkong)
     opprettBilett(parkett)
 
-
-    # Må oppdatere ordre med setOrdreAntallOgPris(ordreNr)            
-
-
-
     conn.commit()
     conn.close()
+
+    if success:
+        print(f"Kjøp av seter i gamle scene fullført")
+        queries.updateOrdrePrisAndAntall(ordreNr)  
+    else:
+        print(f"Billettene er allerede kjøpt")
+        queries.deleteOrdre(ordreNr)
+
+             
+    
+
+scan_seats_gamle_scene()

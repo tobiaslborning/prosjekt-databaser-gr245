@@ -507,20 +507,20 @@ def addPrisTabell():
         "INSERT INTO PrisTabell VALUES ('1', 'Student', '220')")
     cursor.execute(
         "INSERT INTO PrisTabell VALUES ('1', 'Barn', '220')")
-    # cursor.execute(                                       fjernes, skal håndteres av applikasjon
-    #    "INSERT INTO PrisTabell VALUES ('1', '5', '320')") 
-    # cursor.execute(
-    #    "INSERT INTO PrisTabell VALUES ('1', '6', '270')")
+    cursor.execute(                                       
+        "INSERT INTO PrisTabell VALUES ('1', 'Ordinær10', '320')") 
+    cursor.execute(
+        "INSERT INTO PrisTabell VALUES ('1', 'Honnør10', '270')")
     cursor.execute(
         "INSERT INTO PrisTabell VALUES ('2', 'Ordinær', '450')")
     cursor.execute(
         "INSERT INTO PrisTabell VALUES ('2', 'Honnør', '380')")
     cursor.execute(
         "INSERT INTO PrisTabell VALUES ('2', 'Student', '280')")
-    # cursor.execute(                                       fjernes, skal håndteres av applikasjon
-    #    "INSERT INTO PrisTabell VALUES ('2', '4', '420')")
-    # cursor.execute(
-    #     "INSERT INTO PrisTabell VALUES ('2', '5', '360')")
+    cursor.execute(                                       
+        "INSERT INTO PrisTabell VALUES ('2', 'Ordinær10', '420')")
+    cursor.execute(
+         "INSERT INTO PrisTabell VALUES ('2', 'Honnør10', '360')")
 
 def addSalAndSete():
     # Slett alt i TeaterSal og Sete
@@ -540,7 +540,7 @@ def addSalAndSete():
             seteNr += 1
             seteID += 1
             if (seteNr in range(467,471) or seteNr in range(495,499)): # sete 1 - 504
-                print(f"Did not insert:{seteNr}")
+                continue
             else:
                 cursor.execute("INSERT INTO Sete VALUES (?,1,?,?,'Parkett')", (seteID, seteNr, radNr))
 
@@ -625,6 +625,16 @@ def addSalAndSete():
 #     conn.commit()
 #     conn.close()
 
+def deleteAllOrdre():
+    cursor.execute(
+        "DELETE FROM Ordre"
+    )
+
+def deleteAllBilletter():
+    cursor.execute(
+        "DELETE FROM Billett"
+    )
+
 def upload():
     addSalAndSete() 
     addTeaterStykke() 
@@ -639,7 +649,9 @@ def upload():
     addHarOppgave()
     addKunde()
     addPrisTabell()
-
+    deleteAllOrdre()
+    deleteAllBilletter()
+    print("\nUpload complete\n")
 upload()
 conn.commit()
 conn.close()

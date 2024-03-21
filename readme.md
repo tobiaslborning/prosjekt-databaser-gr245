@@ -1,3 +1,15 @@
+# TDT4145 - Gruppe 245 - DB2 
+### Gruppemedlemer
+- Åsmund Løvoll
+- Eivind Biti Holmen
+- Tobias Liene Borning
+
+## Generell Info
+Denne zip filen inneholder __alt__ som er knyttet til leveransen  
+- Databasen vår er lagret i filen `teaterDB.db`  
+- Tekstlig output fra spørringene er lagret i `tekstlig_output.txt`
+- Guide på hvordan en kjører prosjektet står under, pass på at terminalen er startet i samme mappe `(/prosjekt-databaser-gr245)`, som alle python filene, samt databasen befinner seg.
+- SQL filene til spørringene i oppgave 5,6 og 7 ligger i `queries` mappa, men disse er også implementer i selve programmet.
 ## Hvordan kjøre prosjektet:
 
 __Initialisering av database__
@@ -70,5 +82,6 @@ _Baard Bratte_, spilt av _Fabian Heidelberg Lunde_ var ikke lagt til i noen av a
 
 ### Trønder
 De to skuespillerne som spiller Trønder; _Fabian Heidelberg Lunde_ og _Isak Holmen Sørensen_ har vi antatt at spiller trønder i alle andre aktene der de ikke spiller hovedrollen sin. Dette gjorde at vi måtte lage to roller; _Tronder(1)_ og _Tronder(2)_ Slik at disse rollene blir unike.
+
 
  

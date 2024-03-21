@@ -1,0 +1,502 @@
+Dette er en utskrift fra terminalen der alle brukerhistoriene blir kjørt
+
+tobiasborning@Tobiass-MacBook-Pro-2 prosjekt-databaser-gr245 % sqlite3 teaterDB.db
+SQLite version 3.43.2 2023-10-10 13:08:14
+Enter ".help" for usage hints.
+sqlite> .read remove.sql
+sqlite> .read insert.sql
+sqlite> .q
+tobiasborning@Tobiass-MacBook-Pro-2 prosjekt-databaser-gr245 % python3 upload.py
+
+Informasjonen er lastet inn i databasen
+
+tobiasborning@Tobiass-MacBook-Pro-2 prosjekt-databaser-gr245 % python3 scan_seats_hovedscenen.py
+Kjøp av seter i hovedscenen fullført
+tobiasborning@Tobiass-MacBook-Pro-2 prosjekt-databaser-gr245 % python3 scan_seats_gamle_scene.py
+Kjøp av seter i gamle scene fullført
+tobiasborning@Tobiass-MacBook-Pro-2 prosjekt-databaser-gr245 % python3 main.py
+--------------------------------------------------------
+Hva ønsker du å gjøre?
+1. Utføre brukerhistorier
+2. Registrere ny bruker
+3. Kjøp billett(er) til en forestilling
+4. Hent ordre
+5. Avslutte programmet
+
+
+Skriv inn tallet til ønsket handling: 1
+--------------------------------------------------------
+Hvilken brukerhistorie ønsker du å teste?
+1. Laste opp all data til databaser  [Fullført ved initialisering av programmet]
+2. Fylle inn allerede kjøpt billetter  [Fullført ved initialisering av programmet]
+3. Kjøp 9 billetter til Størst av Alt er Kjærligheten
+4. Sjekk hvilke forestillingrer som finnes på en dato
+5. Sjekk hvilke skuespillere som er med i et stykke
+6. Sjekk hvilke forestillinger som har solgt best
+7. Sjekk hvilke skuespillere som har spilt i samme akt
+
+
+#### BRUKERHISTORIE 3
+
+
+Skriv inn tall på brukerhistorie du ønsker å teste: 3
+
+Denne funksjonen kjøper 9 billetter til Størst av alt er kjærligheten, dato 06-02-2024
+Forestillingen vises i Sal nr 2; Gamle Scene
+Billettene kjøpes til området Parkett, rad 1, sete 1-9
+Denne vil lage en ordre med 9 billetter til kunden Ola Nordmann med kundeNr 4
+Det er også mulig å kjøpe billetter ved å bruke programmet
+
+
+----OrdreNr: 3----
+
+Størst av alt er kjærligheten - 06-02-2024 - Gamle Scene - Parkett - Rad Nr 1 - Sete Nr 1 - 350 kr
+Størst av alt er kjærligheten - 06-02-2024 - Gamle Scene - Parkett - Rad Nr 1 - Sete Nr 2 - 350 kr
+Størst av alt er kjærligheten - 06-02-2024 - Gamle Scene - Parkett - Rad Nr 1 - Sete Nr 3 - 350 kr
+Størst av alt er kjærligheten - 06-02-2024 - Gamle Scene - Parkett - Rad Nr 1 - Sete Nr 4 - 350 kr
+Størst av alt er kjærligheten - 06-02-2024 - Gamle Scene - Parkett - Rad Nr 1 - Sete Nr 5 - 350 kr
+Størst av alt er kjærligheten - 06-02-2024 - Gamle Scene - Parkett - Rad Nr 1 - Sete Nr 6 - 350 kr
+Størst av alt er kjærligheten - 06-02-2024 - Gamle Scene - Parkett - Rad Nr 1 - Sete Nr 7 - 350 kr
+Størst av alt er kjærligheten - 06-02-2024 - Gamle Scene - Parkett - Rad Nr 1 - Sete Nr 8 - 350 kr
+Størst av alt er kjærligheten - 06-02-2024 - Gamle Scene - Parkett - Rad Nr 1 - Sete Nr 9 - 350 kr
+
+Totalpris: 3150 kr
+
+
+--------------------------------------------------------
+Hva ønsker du å gjøre?
+1. Utføre brukerhistorier
+2. Registrere ny bruker
+3. Kjøp billett(er) til en forestilling
+4. Hent ordre
+5. Avslutte programmet
+
+
+### BRUKERHISTORIE 4
+
+Skriv inn tallet til ønsket handling: 1
+--------------------------------------------------------
+Hvilken brukerhistorie ønsker du å teste?
+1. Laste opp all data til databaser  [Fullført ved initialisering av programmet]
+2. Fylle inn allerede kjøpt billetter  [Fullført ved initialisering av programmet]
+3. Kjøp 9 billetter til Størst av Alt er Kjærligheten
+4. Sjekk hvilke forestillingrer som finnes på en dato
+5. Sjekk hvilke skuespillere som er med i et stykke
+6. Sjekk hvilke forestillinger som har solgt best
+7. Sjekk hvilke skuespillere som har spilt i samme akt
+
+Skriv inn tall på brukerhistorie du ønsker å teste: 4
+Skriv inn datoen du ønsker å se forestillinger for (dd-mm-yyyy): 14-02-2024
+
+----Forestillinger som vises på 14-02-2024----
+
+Størst av alt er kjærligheten      |    Antall seter solgt: 0
+
+--------------------------------------------------------
+Hva ønsker du å gjøre?
+1. Utføre brukerhistorier
+2. Registrere ny bruker
+3. Kjøp billett(er) til en forestilling
+4. Hent ordre
+5. Avslutte programmet
+
+
+Skriv inn tallet til ønsket handling: 1
+--------------------------------------------------------
+Hvilken brukerhistorie ønsker du å teste?
+1. Laste opp all data til databaser  [Fullført ved initialisering av programmet]
+2. Fylle inn allerede kjøpt billetter  [Fullført ved initialisering av programmet]
+3. Kjøp 9 billetter til Størst av Alt er Kjærligheten
+4. Sjekk hvilke forestillingrer som finnes på en dato
+5. Sjekk hvilke skuespillere som er med i et stykke
+6. Sjekk hvilke forestillinger som har solgt best
+7. Sjekk hvilke skuespillere som har spilt i samme akt
+
+### BRUKERHISTORIE 5
+
+Skriv inn tall på brukerhistorie du ønsker å teste: 5
+Skriv inn navnet på stykket du ønsker å se skuespillere for: Størst av alt er kjærligheten
+
+----Skuespillere----
+
+Sunniva Du Mond Nordal        spiller rollen Sunniva Du Mond Nordal             i Størst av alt er kjærligheten
+Jo Saberniak                  spiller rollen Jo Saberniak                       i Størst av alt er kjærligheten
+Marte.M Steinholt             spiller rollen Marte.M Steinholt                  i Størst av alt er kjærligheten
+Tor Ivar Hagen                spiller rollen Tor Ivar Hagen                     i Størst av alt er kjærligheten
+Trond-Ove Skrødal             spiller rollen Trond-Ove Skrødal                  i Størst av alt er kjærligheten
+Natalie Grøndahl Tangen       spiller rollen Natalie Grøndahl Tangen            i Størst av alt er kjærligheten
+Åsmund Flaten                 spiller rollen Åsmund Flaten                      i Størst av alt er kjærligheten
+
+--------------------------------------------------------
+Hva ønsker du å gjøre?
+1. Utføre brukerhistorier
+2. Registrere ny bruker
+3. Kjøp billett(er) til en forestilling
+4. Hent ordre
+5. Avslutte programmet
+
+
+Skriv inn tallet til ønsket handling: 1       
+--------------------------------------------------------
+Hvilken brukerhistorie ønsker du å teste?
+1. Laste opp all data til databaser  [Fullført ved initialisering av programmet]
+2. Fylle inn allerede kjøpt billetter  [Fullført ved initialisering av programmet]
+3. Kjøp 9 billetter til Størst av Alt er Kjærligheten
+4. Sjekk hvilke forestillingrer som finnes på en dato
+5. Sjekk hvilke skuespillere som er med i et stykke
+6. Sjekk hvilke forestillinger som har solgt best
+7. Sjekk hvilke skuespillere som har spilt i samme akt
+
+Skriv inn tall på brukerhistorie du ønsker å teste: 5
+Skriv inn navnet på stykket du ønsker å se skuespillere for: Kongsemnene
+
+----Skuespillere----
+
+Arturo Scotti                 spiller rollen Haakon Haakonssønn                 i Kongsemnene
+Emil Olafsson                 spiller rollen Dagfinn Bonde                      i Kongsemnene
+Emil Olafsson                 spiller rollen Jatgeir Skald                      i Kongsemnene
+Emma Caroline Deichmann       spiller rollen Sigrid (Skules søster)             i Kongsemnene
+Emma Caroline Deichmann       spiller rollen Ingebjørg                          i Kongsemnene
+Hans Petter Nilsen            spiller rollen Skule jarl                         i Kongsemnene
+Ingunn Beate Strige Øyen      spiller rollen Inga fra Vartejg (Haakons Mor)     i Kongsemnene
+Isak Holmen Sørensen          spiller rollen Paal Flida                         i Kongsemnene
+Madeleine Brandtzæg Nilsen    spiller rollen Fru Ragnhild (Skules hustru)       i Kongsemnene
+Per Bogstad Gulliksen         spiller rollen Gregorius Jonssønn                 i Kongsemnene
+Synnøve Fossum Eriksen        spiller rollen Margrete (Skules datter)           i Kongsemnene
+Thomas Jensen Takyi           spiller rollen Biskop Nikolas                     i Kongsemnene
+Snorre Ryen Tøndel            spiller rollen Peter (prest og Ingebjørgs sønn)   i Kongsemnene
+Isak Holmen Sørensen          spiller rollen Trønder(1)                         i Kongsemnene
+Fabian Heidelberg Lunde       spiller rollen Trønder(2)                         i Kongsemnene
+Fabian Heidelberg Lunde       spiller rollen Baard Bratte                       i Kongsemnene
+
+--------------------------------------------------------
+Hva ønsker du å gjøre?
+1. Utføre brukerhistorier
+2. Registrere ny bruker
+3. Kjøp billett(er) til en forestilling
+4. Hent ordre
+5. Avslutte programmet
+
+### BRUKERHISTORIE 6
+
+Skriv inn tallet til ønsket handling: 1
+--------------------------------------------------------
+Hvilken brukerhistorie ønsker du å teste?
+1. Laste opp all data til databaser  [Fullført ved initialisering av programmet]
+2. Fylle inn allerede kjøpt billetter  [Fullført ved initialisering av programmet]
+3. Kjøp 9 billetter til Størst av Alt er Kjærligheten
+4. Sjekk hvilke forestillingrer som finnes på en dato
+5. Sjekk hvilke skuespillere som er med i et stykke
+6. Sjekk hvilke forestillinger som har solgt best
+7. Sjekk hvilke skuespillere som har spilt i samme akt
+
+Skriv inn tall på brukerhistorie du ønsker å teste: 6
+
+---- Forestillinger som har solgt best ----
+
+Kongsemnene - 03-02-2024 billetter solgt: 65
+Størst av alt er kjærligheten - 03-02-2024 billetter solgt: 27
+Størst av alt er kjærligheten - 06-02-2024 billetter solgt: 9
+Størst av alt er kjærligheten - 07-02-2024 billetter solgt: 0
+Størst av alt er kjærligheten - 12-02-2024 billetter solgt: 0
+Størst av alt er kjærligheten - 13-02-2024 billetter solgt: 0
+Størst av alt er kjærligheten - 14-02-2024 billetter solgt: 0
+Kongsemnene - 01-02-2024 billetter solgt: 0
+Kongsemnene - 02-02-2024 billetter solgt: 0
+Kongsemnene - 05-02-2024 billetter solgt: 0
+Kongsemnene - 06-02-2024 billetter solgt: 0
+
+### BRUKERHISTORIE 7
+
+--------------------------------------------------------
+Hva ønsker du å gjøre?
+1. Utføre brukerhistorier
+2. Registrere ny bruker
+3. Kjøp billett(er) til en forestilling
+4. Hent ordre
+5. Avslutte programmet
+
+
+Skriv inn tallet til ønsket handling: 1
+--------------------------------------------------------
+Hvilken brukerhistorie ønsker du å teste?
+1. Laste opp all data til databaser  [Fullført ved initialisering av programmet]
+2. Fylle inn allerede kjøpt billetter  [Fullført ved initialisering av programmet]
+3. Kjøp 9 billetter til Størst av Alt er Kjærligheten
+4. Sjekk hvilke forestillingrer som finnes på en dato
+5. Sjekk hvilke skuespillere som er med i et stykke
+6. Sjekk hvilke forestillinger som har solgt best
+7. Sjekk hvilke skuespillere som har spilt i samme akt
+
+Skriv inn tall på brukerhistorie du ønsker å teste: 7
+Skriv inn navnet på skuespilleren du ønsker å se medskuespillere for: Arturo Scotti
+
+----Medskuespillere til Arturo Scotti----
+
+Emil Olafsson                 i akt 1 i Kongsemnene
+Emma Caroline Deichmann       i akt 1 i Kongsemnene
+Fabian Heidelberg Lunde       i akt 1 i Kongsemnene
+Hans Petter Nilsen            i akt 1 i Kongsemnene
+Ingunn Beate Strige Øyen      i akt 1 i Kongsemnene
+Isak Holmen Sørensen          i akt 1 i Kongsemnene
+Madeleine Brandtzæg Nilsen    i akt 1 i Kongsemnene
+Per Bogstad Gulliksen         i akt 1 i Kongsemnene
+Synnøve Fossum Eriksen        i akt 1 i Kongsemnene
+Thomas Jensen Takyi           i akt 1 i Kongsemnene
+Emil Olafsson                 i akt 2 i Kongsemnene
+Emma Caroline Deichmann       i akt 2 i Kongsemnene
+Fabian Heidelberg Lunde       i akt 2 i Kongsemnene
+Hans Petter Nilsen            i akt 2 i Kongsemnene
+Isak Holmen Sørensen          i akt 2 i Kongsemnene
+Per Bogstad Gulliksen         i akt 2 i Kongsemnene
+Synnøve Fossum Eriksen        i akt 2 i Kongsemnene
+Thomas Jensen Takyi           i akt 2 i Kongsemnene
+Emil Olafsson                 i akt 3 i Kongsemnene
+Fabian Heidelberg Lunde       i akt 3 i Kongsemnene
+Hans Petter Nilsen            i akt 3 i Kongsemnene
+Ingunn Beate Strige Øyen      i akt 3 i Kongsemnene
+Isak Holmen Sørensen          i akt 3 i Kongsemnene
+Per Bogstad Gulliksen         i akt 3 i Kongsemnene
+Snorre Ryen Tøndel            i akt 3 i Kongsemnene
+Synnøve Fossum Eriksen        i akt 3 i Kongsemnene
+Thomas Jensen Takyi           i akt 3 i Kongsemnene
+Emil Olafsson                 i akt 4 i Kongsemnene
+Emma Caroline Deichmann       i akt 4 i Kongsemnene
+Fabian Heidelberg Lunde       i akt 4 i Kongsemnene
+Hans Petter Nilsen            i akt 4 i Kongsemnene
+Isak Holmen Sørensen          i akt 4 i Kongsemnene
+Per Bogstad Gulliksen         i akt 4 i Kongsemnene
+Snorre Ryen Tøndel            i akt 4 i Kongsemnene
+Synnøve Fossum Eriksen        i akt 4 i Kongsemnene
+Emil Olafsson                 i akt 5 i Kongsemnene
+Emma Caroline Deichmann       i akt 5 i Kongsemnene
+Fabian Heidelberg Lunde       i akt 5 i Kongsemnene
+Hans Petter Nilsen            i akt 5 i Kongsemnene
+Isak Holmen Sørensen          i akt 5 i Kongsemnene
+Per Bogstad Gulliksen         i akt 5 i Kongsemnene
+Snorre Ryen Tøndel            i akt 5 i Kongsemnene
+Synnøve Fossum Eriksen        i akt 5 i Kongsemnene
+
+--------------------------------------------------------
+Hva ønsker du å gjøre?
+1. Utføre brukerhistorier
+2. Registrere ny bruker
+3. Kjøp billett(er) til en forestilling
+4. Hent ordre
+5. Avslutte programmet
+
+
+Skriv inn tallet til ønsket handling: 1
+--------------------------------------------------------
+Hvilken brukerhistorie ønsker du å teste?
+1. Laste opp all data til databaser  [Fullført ved initialisering av programmet]
+2. Fylle inn allerede kjøpt billetter  [Fullført ved initialisering av programmet]
+3. Kjøp 9 billetter til Størst av Alt er Kjærligheten
+4. Sjekk hvilke forestillingrer som finnes på en dato
+5. Sjekk hvilke skuespillere som er med i et stykke
+6. Sjekk hvilke forestillinger som har solgt best
+7. Sjekk hvilke skuespillere som har spilt i samme akt
+
+Skriv inn tall på brukerhistorie du ønsker å teste: 7
+Skriv inn navnet på skuespilleren du ønsker å se medskuespillere for: Ingunn Beate Strige Øyen
+
+----Medskuespillere til Ingunn Beate Strige Øyen----
+
+Arturo Scotti                 i akt 1 i Kongsemnene
+Emil Olafsson                 i akt 1 i Kongsemnene
+Emma Caroline Deichmann       i akt 1 i Kongsemnene
+Fabian Heidelberg Lunde       i akt 1 i Kongsemnene
+Hans Petter Nilsen            i akt 1 i Kongsemnene
+Isak Holmen Sørensen          i akt 1 i Kongsemnene
+Madeleine Brandtzæg Nilsen    i akt 1 i Kongsemnene
+Per Bogstad Gulliksen         i akt 1 i Kongsemnene
+Synnøve Fossum Eriksen        i akt 1 i Kongsemnene
+Thomas Jensen Takyi           i akt 1 i Kongsemnene
+Arturo Scotti                 i akt 3 i Kongsemnene
+Emil Olafsson                 i akt 3 i Kongsemnene
+Fabian Heidelberg Lunde       i akt 3 i Kongsemnene
+Hans Petter Nilsen            i akt 3 i Kongsemnene
+Isak Holmen Sørensen          i akt 3 i Kongsemnene
+Per Bogstad Gulliksen         i akt 3 i Kongsemnene
+Snorre Ryen Tøndel            i akt 3 i Kongsemnene
+Synnøve Fossum Eriksen        i akt 3 i Kongsemnene
+Thomas Jensen Takyi           i akt 3 i Kongsemnene
+
+### Tilleggsfunksjoner
+
+--------------------------------------------------------
+Hva ønsker du å gjøre?
+1. Utføre brukerhistorier
+2. Registrere ny bruker
+3. Kjøp billett(er) til en forestilling
+4. Hent ordre
+5. Avslutte programmet
+
+
+Skriv inn tallet til ønsket handling: 2
+Registrer ny bruker
+
+Navn: Tobias BBB
+Telefon: 12345
+Addresse: Gate 1
+5 Tobias BBB 12345 Gate 1
+
+Tobias BBB registrert 
+
+
+--------------------------------------------------------
+Hva ønsker du å gjøre?
+1. Utføre brukerhistorier
+2. Registrere ny bruker
+3. Kjøp billett(er) til en forestilling
+4. Hent ordre
+5. Avslutte programmet
+
+
+Skriv inn tallet til ønsket handling: 3
+Dersom du ikke er registrert er du nødt til å registrere deg først
+Skriv inn telefonnummeret registrert på brukeren din: 12345
+
+Velkommen Tobias BBB!
+
+Hvilken forestilling ønsker du å kjøpe billetter til?
+Størst av alt er kjærligheten - 1
+Kongsemnene - 2
+
+Skriv inn tallet til ønsket forestilling: 2
+
+----Datoer for forestillingen----
+
+01-02-2024
+02-02-2024
+03-02-2024
+05-02-2024
+06-02-2024
+
+Skriv inn datoen du ønsker å kjøpe billetter til (dd-mm-yyyy): 03-02-2024
+
+----Billettyper----
+
+Honnør - 380 kr
+Ordinær - 450 kr
+Student - 280 kr
+
+Skriv ønsket billetttype: Honnør
+Skriv inn antall billetter: 1
+
+Ønsker du å legge til flere billettyper? (J/N): n
+Bekreft kjøp av billetter og fortsett til setevalg? (J/N): j
+
+----Setevalg for Kongsemnene på 03-02-2024 i sal 1----
+
+For liste over opptatte seter, tast 1
+
+Skriv inn tallet til ønsket handling: 1
+
+----Vis opptatte seter for Kongsemnene på 03-02-2024 i sal 1----
+
+Rad 1 Sete 11 Område Parkett
+Rad 1 Sete 12 Område Parkett
+Rad 1 Sete 13 Område Parkett
+Rad 1 Sete 14 Område Parkett
+Rad 1 Sete 15 Område Parkett
+Rad 1 Sete 16 Område Parkett
+Rad 1 Sete 17 Område Parkett
+Rad 1 Sete 18 Område Parkett
+Rad 1 Sete 19 Område Parkett
+Rad 1 Sete 20 Område Parkett
+Rad 1 Sete 21 Område Parkett
+Rad 1 Sete 22 Område Parkett
+Rad 1 Sete 23 Område Parkett
+Rad 1 Sete 24 Område Parkett
+Rad 1 Sete 25 Område Parkett
+Rad 1 Sete 26 Område Parkett
+Rad 1 Sete 27 Område Parkett
+Rad 1 Sete 28 Område Parkett
+Rad 2 Sete 29 Område Parkett
+Rad 2 Sete 30 Område Parkett
+Rad 2 Sete 31 Område Parkett
+Rad 2 Sete 32 Område Parkett
+Rad 2 Sete 33 Område Parkett
+Rad 2 Sete 34 Område Parkett
+Rad 2 Sete 35 Område Parkett
+Rad 2 Sete 36 Område Parkett
+Rad 2 Sete 37 Område Parkett
+Rad 2 Sete 38 Område Parkett
+Rad 2 Sete 39 Område Parkett
+Rad 2 Sete 40 Område Parkett
+Rad 2 Sete 41 Område Parkett
+Rad 2 Sete 42 Område Parkett
+Rad 2 Sete 43 Område Parkett
+Rad 2 Sete 44 Område Parkett
+Rad 2 Sete 45 Område Parkett
+Rad 2 Sete 46 Område Parkett
+Rad 2 Sete 47 Område Parkett
+Rad 3 Sete 66 Område Parkett
+Rad 3 Sete 67 Område Parkett
+Rad 3 Sete 68 Område Parkett
+Rad 3 Sete 69 Område Parkett
+Rad 3 Sete 70 Område Parkett
+Rad 3 Sete 71 Område Parkett
+Rad 3 Sete 72 Område Parkett
+Rad 3 Sete 73 Område Parkett
+Rad 3 Sete 74 Område Parkett
+Rad 3 Sete 75 Område Parkett
+Rad 4 Sete 100 Område Parkett
+Rad 4 Sete 101 Område Parkett
+Rad 5 Sete 127 Område Parkett
+Rad 5 Sete 128 Område Parkett
+Rad 6 Sete 154 Område Parkett
+Rad 6 Sete 155 Område Parkett
+Rad 7 Sete 181 Område Parkett
+Rad 7 Sete 182 Område Parkett
+Rad 13 Sete 337 Område Parkett
+Rad 13 Sete 338 Område Parkett
+Rad 13 Sete 339 Område Parkett
+Rad 13 Sete 347 Område Parkett
+Rad 14 Sete 375 Område Parkett
+Rad 15 Sete 398 Område Parkett
+Rad 15 Sete 399 Område Parkett
+Rad 15 Sete 400 Område Parkett
+Rad 15 Sete 403 Område Parkett
+Rad 16 Sete 431 Område Parkett
+
+----Setevalg for billet nummer 1, type Honnør----
+
+Gyldige områder: Parkett, Galleri Nedre, Galleri Øvre
+
+Skriv inn radnummer: 1
+Skriv inn setenummer: 1
+Skriv inn område: Parkett
+
+
+Billett 1 av type Honnør kjøpt
+
+
+Ordre 4 fullført
+
+Totalpris: 380 kr
+Antall billetter: 1
+
+---------Dine billetter---------
+
+Kongsemnene - 03-02-2024 - Hovedscenen - Parkett - Rad Nr 1 - Sete Nr 1 - 380 kr
+
+--------------------------------------------------------
+Hva ønsker du å gjøre?
+1. Utføre brukerhistorier
+2. Registrere ny bruker
+3. Kjøp billett(er) til en forestilling
+4. Hent ordre
+5. Avslutte programmet
+
+
+Skriv inn tallet til ønsket handling: 4
+Skriv inn telefonnummeret registrert på brukeren din: 12345
+
+----OrdreNr: 4----
+
+Kongsemnene - 03-02-2024 - Hovedscenen - Parkett - Rad Nr 1 - Sete Nr 1 - 380 kr
+
+Totalpris: 380 kr
+

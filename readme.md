@@ -43,6 +43,7 @@ Vi har endret Sete-entiteten slik at alle seter har en unik SeteID. Dette ble gj
 
 ### Endret Ordre-entiteten
 Vi fjernet `NOT NULL` fra `pris` og `antall` i Ordre-entiteten da det ble mer hensiktsmessig å opprette en tom ordre først og deretter fylle inn pris og antall senere.
+Vi endret også navnet på primærnøkkelen `OrdreID` til `OrdreNr`.
 
 ### Endret Billett-entiten
 Endret primærnøkkelen __BillettNr__ fra `INT` til `INTEGER`, slik at det auto-incrementing av en primærnøkkel.
@@ -61,5 +62,12 @@ Det er ingen kjøpte seter i galleriet, så de blir derfor ikke scannet. Fremgan
 ### Brukerhistorie 5
 Det ble ansett som mest ryddig at brukeren av programmet kunne angi hvilket stykke de ønsket å se skuespillerne til. Dette ble implementert ved å legge til en enkel linje i spørringen: `WHERE Stykkenavn = “?”`.
 
+### Brukerhistorie 7
+Vi har antatt at resultatet skal være en oversikt over alle skuespillere den inntastede skuespilleren har spilt med, inkludert akten og stykke de spilte sammen i. 
+
+### Baard Bratte 
+_Baard Bratte_, spilt av _Fabian Heidelberg Lunde_ var ikke lagt til i noen av aktene, vi la derfor til _Baard Bratte_ i akt 3 og 4.
+
+### Trønder?
 
  

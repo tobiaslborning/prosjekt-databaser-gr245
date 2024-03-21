@@ -163,7 +163,7 @@ def genererNyttOrdreNr():
     cursor.execute("SELECT * FROM sqlite_master")
 
     cursor.execute(
-        "SELECT OrdreID FROM Ordre ORDER BY OrdreID DESC LIMIT 1")
+        "SELECT OrdreNr FROM Ordre ORDER BY OrdreNr DESC LIMIT 1")
     antall = cursor.fetchone()
     con.close()
 
@@ -314,7 +314,7 @@ def settOrdreAntallOgPris(ordreNr):
     num_rows = len(price)
 
     
-    cursor.execute("UPDATE Ordre SET Pris = ?, ANtall = ? WHERE OrdreID = ?",(total_price, num_rows, ordreNr))
+    cursor.execute("UPDATE Ordre SET Pris = ?, ANtall = ? WHERE OrdreNr = ?",(total_price, num_rows, ordreNr))
     
     con.close()
     
@@ -470,7 +470,7 @@ def slettOrdre(ordreNr):
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
 
-    cursor.execute("DELETE FROM Ordre WHERE OrdreID = ?", (ordreNr,))
+    cursor.execute("DELETE FROM Ordre WHERE OrdreNr = ?", (ordreNr,))
     
     con.commit()
     con.close()
@@ -487,14 +487,14 @@ def hentBilletterIOrdre(ordreNr):
                     SELECT tstykke.Navn,  topps.Dato, tsal.Navn,  s.Omrade, s.RadNr, s.SeteNr, b.Pris
                     FROM Ordre as o
                     JOIN Billett as b
-                    ON o.OrdreID = b.OrdreNr
+                    ON o.OrdreNr = b.OrdreNr
                     NATURAL JOIN Sete as s
                     JOIN TeaterOppsettning as topps
                     ON b.StykkeID = topps.StykkeID AND b.Dato = topps.Dato
                     NATURAL JOIN TeaterStykke as tstykke
                     JOIN TeaterSal as tsal
                     ON s.SalNr = tsal.SalNr
-                    WHERE o.OrdreID = ?
+                    WHERE o.OrdreNr = ?
                    ''', (ordreNr,))
     ordre = cursor.fetchall()
     con.close()
@@ -506,7 +506,7 @@ def hentKundeOrdre(telefon):
     cursor.execute("SELECT * FROM sqlite_master")
 
     cursor.execute('''
-                    SELECT o.OrdreID
+                    SELECT o.OrdreNr
                     FROM Ordre as o
                     JOIN Kunde as k
                     ON o.KundeNr = k.KundeNr
@@ -556,7 +556,7 @@ def oppdaterOrdrePrisOgAntall(ordreNr):
     antall = cursor.fetchone()
     antall = antall[0]
 
-    cursor.execute("UPDATE Ordre SET Pris = ?, Antall = ? WHERE OrdreID = ?",(totalpris, antall, ordreNr))
+    cursor.execute("UPDATE Ordre SET Pris = ?, Antall = ? WHERE OrdreNr = ?",(totalpris, antall, ordreNr))
     
 
     con.commit()
@@ -568,7 +568,7 @@ def hentOrdrePrisOgAntall(ordreNr):
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
 
-    cursor.execute("SELECT Pris, Antall FROM Ordre WHERE OrdreID = ?", (ordreNr,))
+    cursor.execute("SELECT Pris, Antall FROM Ordre WHERE OrdreNr = ?", (ordreNr,))
     info = cursor.fetchone()
 
     con.close()
@@ -622,6 +622,6 @@ def hentOppg7(skuespillerNavn):
         print(f"{skuespillerNavn} spiller ikke med noen andre skuespillere i databasen")
         return
     for row in info:
-        print(f"{row[0]} spiller med " + f"{row[1]}".ljust(30) + f"i akt {row[2]} i {row[3]}")
+        print(f"{row[1]}".ljust(30) + f"i akt {row[2]} i {row[3]}")
     con.close()
     return info

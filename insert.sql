@@ -96,7 +96,7 @@ CREATE TABLE Billett (
     Pris INT NOT NULL, --  Kalkulert i applikasjon fra PrisTabell ved å bruke StykkeID og BillettType fra input i applikasjon
     FOREIGN KEY (StykkeID, Dato) REFERENCES TeaterOppsettning(StykkeID, Dato) ON DELETE RESTRICT ON UPDATE CASCADE,
     FOREIGN KEY (SeteId) REFERENCES Sete(SeteID) ON DELETE RESTRICT ON UPDATE CASCADE,
-    FOREIGN KEY (OrdreNr) REFERENCES Ordre(OrdreID) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (OrdreNr) REFERENCES Ordre(OrdreNr) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE PrisTabell (
@@ -107,7 +107,7 @@ CREATE TABLE PrisTabell (
 );
 
 CREATE TABLE Ordre (
-    OrdreID INTEGER PRIMARY KEY, -- BYTTE TIL INTEGER for AutoIncrement
+    OrdreNr INTEGER PRIMARY KEY, -- BYTTE TIL INTEGER for AutoIncrement
     KjopsTid TIME NOT NULL,
     KjopsDato DATE NOT NULL,
     Antall INT,

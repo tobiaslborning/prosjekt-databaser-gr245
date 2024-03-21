@@ -39,30 +39,30 @@ def printBrukerHistorier():
     print("7. Sjekk hvilke skuespillere som har spilt i samme akt")
     print("")
     while True:
-        videre = int(input("Skriv inn tall på brukerhistorie du ønsker å teste: "))
-        if videre == 1:
+        videre = input("Skriv inn tall på brukerhistorie du ønsker å teste: ")
+        if videre == "1":
             print("Info står i readme.md")
             break
-        elif videre == 2:
+        elif videre == "2":
             print("Infor står i readme.md")
             break
-        elif videre == 3:
+        elif videre == "3":
             oppg3_kjop9Billetter()
             break
-        elif videre == 4:
+        elif videre == "4":
             vis_forestillinger()
             break
-        elif videre == 5:
+        elif videre == "5":
             vis_skuespillere_i_stykke()
             break
-        elif videre == 6:
+        elif videre == "6":
             vis_flest_forestillinger_solgt()
             break
-        elif videre == 7:
+        elif videre == "7":
             vis_medskuespillere()
             break
         else:
-            printBrukerHistorier()
+            printOversikt()
             
 def vis_flest_forestillinger_solgt():
     print("\n---- Forestillinger som har solgt best ----\n")
@@ -85,6 +85,9 @@ def registrer_bruker():
     navn = input("Navn: ")
     telefon = input("Telefon: ")
     addresse = input("Addresse: ")
+    if (len(navn) < 2 or len(telefon) < 2 or len(addresse) < 2):
+        print("\nUgyldig informasjon")
+        return
     queries.registrerKunde(navn, telefon, addresse)
     print(f"\n{navn} registrert \n")
     

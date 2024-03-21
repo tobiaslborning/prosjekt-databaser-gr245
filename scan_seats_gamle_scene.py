@@ -29,8 +29,8 @@ def scan_seats_gamle_scene():
 
     salNr = 2
     stykkeID = 1
-    ordreNr = queries.generateNewOrderNumber()
-    takenSeatIDs = queries.getSoldSeats(stykkeID, dato)
+    ordreNr = queries.genererNyttOrdreNr()
+    takenSeatIDs = queries.hentSolgteSeter(stykkeID, dato)
 
     conn = sqlite3.connect('teaterDB.db')
     cursor = conn.cursor()
@@ -51,10 +51,10 @@ def scan_seats_gamle_scene():
         else:
             sal = 'Parkett'
         radNr = 0
-        for row in sted:
+        for rad in sted:
             radNr += 1
             seteNr = 0
-            for sete in row:
+            for sete in rad:
                 seteNr += 1
                 if (sete == '1'):
                     cursor.execute("SELECT SeteID FROM Sete WHERE SalNr = ? AND SeteNr = ? AND RadNr = ? AND Omrade = ?", (salNr, seteNr, radNr, sal))
@@ -75,10 +75,10 @@ def scan_seats_gamle_scene():
 
     if success:
         print(f"Kjøp av seter i gamle scene fullført")
-        queries.updateOrdrePrisAndAntall(ordreNr)  
+        queries.oppdaterOrdrePrisOgAntall(ordreNr)  
     else:
         print(f"Billettene er allerede kjøpt")
-        queries.deleteOrdre(ordreNr)
+        queries.slettOrdre(ordreNr)
 
              
     

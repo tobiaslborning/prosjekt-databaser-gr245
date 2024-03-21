@@ -22,8 +22,8 @@ def scan_seats_hovedscenen():
 
     salNr = 1
     stykkeID = 2
-    ordreNr = queries.generateNewOrderNumber()
-    takenSeatIDs = queries.getSoldSeats(stykkeID, dato)
+    ordreNr = queries.genererNyttOrdreNr()
+    takenSeatIDs = queries.hentSolgteSeter(stykkeID, dato)
 
     # connect to db
     conn = sqlite3.connect('teaterDB.db')
@@ -57,10 +57,10 @@ def scan_seats_hovedscenen():
   
     if success:
         print(f"Kjøp av seter i hovedscenen fullført")
-        queries.updateOrdrePrisAndAntall(ordreNr)  
+        queries.oppdaterOrdrePrisOgAntall(ordreNr)  
     else:
         print(f"Billettene er allerede kjøpt")
-        queries.deleteOrdre(ordreNr)
+        queries.slettOrdre(ordreNr)
 
     # GALLERI HAR INGEN STOLER, DROPPES
 

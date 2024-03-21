@@ -69,6 +69,6 @@ Vi har antatt at resultatet skal være en oversikt over alle skuespillere den in
 _Baard Bratte_, spilt av _Fabian Heidelberg Lunde_ var ikke lagt til i noen av aktene, vi la derfor til _Baard Bratte_ i akt 3 og 4.
 
 ### Trønder
-De to skuespillerne som spiller Trønder; _Fabian Heidelberg Lunde_  og _Isak Holmen Sørensen_
+De to skuespillerne som spiller Trønder; _Fabian Heidelberg Lunde_ og _Isak Holmen Sørensen_ har vi antatt at spiller trønder i alle andre aktene der de ikke spiller hovedrollen sin. Dette gjorde at vi måtte lage to roller; _Tronder(1)_ og _Tronder(2)_ Slik at disse rollene blir unike.
 
  

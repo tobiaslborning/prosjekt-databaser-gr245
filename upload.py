@@ -28,9 +28,9 @@ def leggTilSkuespillere():
     cursor.execute(
         "INSERT INTO Skuespiller VALUES ('12', '12')")
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('13', '13')")
+        "INSERT INTO Skuespiller VALUES ('13', '13')") # Isak Holmen Sørensen
     cursor.execute(
-        "INSERT INTO Skuespiller VALUES ('14', '14')")
+        "INSERT INTO Skuespiller VALUES ('14', '14')") # Fabian Heidelberg Lunde
     cursor.execute(
         "INSERT INTO Skuespiller VALUES ('15', '15')")
     cursor.execute(
@@ -86,9 +86,9 @@ def leggTilHarRolle():
     cursor.execute(
         "INSERT INTO HarRolle VALUES ('13', '10')")
     cursor.execute(
-        "INSERT INTO HarRolle VALUES ('13', '11')")
+        "INSERT INTO HarRolle VALUES ('13', '11')") # Isak Holmen spiller Trønder(1)
     cursor.execute(
-        "INSERT INTO HarRolle VALUES ('14', '11')")
+        "INSERT INTO HarRolle VALUES ('14', '23')") # Endret fra 11 til 23 Slik at Fabian spiller Trønder(2)
     cursor.execute(
         "INSERT INTO HarRolle VALUES ('14', '12')")
     cursor.execute(
@@ -141,7 +141,7 @@ def leggTilRolle():
     cursor.execute(
         "INSERT INTO Rolle VALUES ('10', 'Paal Flida')")
     cursor.execute(
-        "INSERT INTO Rolle VALUES ('11', 'Trønder')")
+        "INSERT INTO Rolle VALUES ('11', 'Trønder(1)')")
     cursor.execute(
         "INSERT INTO Rolle VALUES ('12', 'Baard Bratte')")
     cursor.execute(
@@ -164,6 +164,8 @@ def leggTilRolle():
         "INSERT INTO Rolle VALUES ('21', 'Natalie Grøndahl Tangen')")
     cursor.execute(
         "INSERT INTO Rolle VALUES ('22', 'Åsmund Flaten')")
+    cursor.execute(
+        "INSERT INTO Rolle VALUES ('23', 'Trønder(2)')")
 
 def leggTilAnsatte():
     #Fjerner alle ansatte før innsetting
@@ -466,14 +468,19 @@ def leggTilRolleIAkt():
         "INSERT INTO RolleIAkt VALUES ('4', '2', '15')")
     cursor.execute(
         "INSERT INTO RolleIAkt VALUES ('5', '2', '15')")
+    # Trønder(1) 
     cursor.execute(
         "INSERT INTO RolleIAkt VALUES ('3', '2', '11')")
     cursor.execute(
         "INSERT INTO RolleIAkt VALUES ('4', '2', '11')")
+    # Trønder(2)
     cursor.execute(
-        "INSERT INTO RolleIAkt VALUES ('1', '2', '11')")
+        "INSERT INTO RolleIAkt VALUES ('1', '2', '23')")
     cursor.execute(
-        "INSERT INTO RolleIAkt VALUES ('5', '2', '11')")
+        "INSERT INTO RolleIAkt VALUES ('2', '2', '23')")
+    cursor.execute(
+        "INSERT INTO RolleIAkt VALUES ('5', '2', '23')")
+    
     cursor.execute(
         "INSERT INTO RolleIAkt VALUES ('3', '2', '12')")
     cursor.execute(

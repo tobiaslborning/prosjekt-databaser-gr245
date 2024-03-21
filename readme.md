@@ -1,13 +1,13 @@
 # TDT4145 - Gruppe 245 - DB2 
 ### Gruppemedlemer
 - Åsmund Løvoll
-- Eivind Biti Holmen
+- Eivind Holmen
 - Tobias Liene Borning
 
 ## Generell Info
 Denne zip filen inneholder __alt__ som er knyttet til leveransen  
 - Databasen vår er lagret i filen `teaterDB.db`  
-- Tekstlig output fra spørringene er lagret i `tekstlig_output.txt`
+- Tekstlig output fra spørringene er lagret i [tekstlig_output.txt](./tekstlig_output.txt)
 - Guide på hvordan en kjører prosjektet står under, pass på at terminalen er startet i samme mappe `(/prosjekt-databaser-gr245)`, som alle python filene, samt databasen befinner seg.
 - SQL filene til spørringene i oppgave 5,6 og 7 ligger i `queries` mappa, men disse er også implementer i selve programmet.
 ## Hvordan kjøre prosjektet:

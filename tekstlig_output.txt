@@ -1,43 +1,6 @@
-Dette er en utskrift fra terminalen der alle brukerhistoriene blir kjørt
-
-tobiasborning@Tobiass-MacBook-Pro-2 prosjekt-databaser-gr245 % sqlite3 teaterDB.db
-SQLite version 3.43.2 2023-10-10 13:08:14
-Enter ".help" for usage hints.
-sqlite> .read remove.sql
-sqlite> .read insert.sql
-sqlite> .q
-tobiasborning@Tobiass-MacBook-Pro-2 prosjekt-databaser-gr245 % python3 upload.py
-
-Informasjonen er lastet inn i databasen
-
-tobiasborning@Tobiass-MacBook-Pro-2 prosjekt-databaser-gr245 % python3 scan_seats_hovedscenen.py
-Kjøp av seter i hovedscenen fullført
-tobiasborning@Tobiass-MacBook-Pro-2 prosjekt-databaser-gr245 % python3 scan_seats_gamle_scene.py
-Kjøp av seter i gamle scene fullført
-tobiasborning@Tobiass-MacBook-Pro-2 prosjekt-databaser-gr245 % python3 main.py
---------------------------------------------------------
-Hva ønsker du å gjøre?
-1. Utføre brukerhistorier
-2. Registrere ny bruker
-3. Kjøp billett(er) til en forestilling
-4. Hent ordre
-5. Avslutte programmet
-
-
-Skriv inn tallet til ønsket handling: 1
---------------------------------------------------------
-Hvilken brukerhistorie ønsker du å teste?
-1. Laste opp all data til databaser  [Fullført ved initialisering av programmet]
-2. Fylle inn allerede kjøpt billetter  [Fullført ved initialisering av programmet]
-3. Kjøp 9 billetter til Størst av Alt er Kjærligheten
-4. Sjekk hvilke forestillingrer som finnes på en dato
-5. Sjekk hvilke skuespillere som er med i et stykke
-6. Sjekk hvilke forestillinger som har solgt best
-7. Sjekk hvilke skuespillere som har spilt i samme akt
-
+Dette er en utskrift fra brukerhistorene som blir kjørt i terminalen
 
 #### BRUKERHISTORIE 3
-
 
 Skriv inn tall på brukerhistorie du ønsker å teste: 3
 
@@ -62,28 +25,7 @@ Størst av alt er kjærligheten - 06-02-2024 - Gamle Scene - Parkett - Rad Nr 1 
 
 Totalpris: 3150 kr
 
-
---------------------------------------------------------
-Hva ønsker du å gjøre?
-1. Utføre brukerhistorier
-2. Registrere ny bruker
-3. Kjøp billett(er) til en forestilling
-4. Hent ordre
-5. Avslutte programmet
-
-
 ### BRUKERHISTORIE 4
-
-Skriv inn tallet til ønsket handling: 1
---------------------------------------------------------
-Hvilken brukerhistorie ønsker du å teste?
-1. Laste opp all data til databaser  [Fullført ved initialisering av programmet]
-2. Fylle inn allerede kjøpt billetter  [Fullført ved initialisering av programmet]
-3. Kjøp 9 billetter til Størst av Alt er Kjærligheten
-4. Sjekk hvilke forestillingrer som finnes på en dato
-5. Sjekk hvilke skuespillere som er med i et stykke
-6. Sjekk hvilke forestillinger som har solgt best
-7. Sjekk hvilke skuespillere som har spilt i samme akt
 
 Skriv inn tall på brukerhistorie du ønsker å teste: 4
 Skriv inn datoen du ønsker å se forestillinger for (dd-mm-yyyy): 14-02-2024
@@ -92,25 +34,6 @@ Skriv inn datoen du ønsker å se forestillinger for (dd-mm-yyyy): 14-02-2024
 
 Størst av alt er kjærligheten      |    Antall seter solgt: 0
 
---------------------------------------------------------
-Hva ønsker du å gjøre?
-1. Utføre brukerhistorier
-2. Registrere ny bruker
-3. Kjøp billett(er) til en forestilling
-4. Hent ordre
-5. Avslutte programmet
-
-
-Skriv inn tallet til ønsket handling: 1
---------------------------------------------------------
-Hvilken brukerhistorie ønsker du å teste?
-1. Laste opp all data til databaser  [Fullført ved initialisering av programmet]
-2. Fylle inn allerede kjøpt billetter  [Fullført ved initialisering av programmet]
-3. Kjøp 9 billetter til Størst av Alt er Kjærligheten
-4. Sjekk hvilke forestillingrer som finnes på en dato
-5. Sjekk hvilke skuespillere som er med i et stykke
-6. Sjekk hvilke forestillinger som har solgt best
-7. Sjekk hvilke skuespillere som har spilt i samme akt
 
 ### BRUKERHISTORIE 5
 
@@ -128,24 +51,6 @@ Natalie Grøndahl Tangen       spiller rollen Natalie Grøndahl Tangen          
 Åsmund Flaten                 spiller rollen Åsmund Flaten                      i Størst av alt er kjærligheten
 
 --------------------------------------------------------
-Hva ønsker du å gjøre?
-1. Utføre brukerhistorier
-2. Registrere ny bruker
-3. Kjøp billett(er) til en forestilling
-4. Hent ordre
-5. Avslutte programmet
-
-
-Skriv inn tallet til ønsket handling: 1       
---------------------------------------------------------
-Hvilken brukerhistorie ønsker du å teste?
-1. Laste opp all data til databaser  [Fullført ved initialisering av programmet]
-2. Fylle inn allerede kjøpt billetter  [Fullført ved initialisering av programmet]
-3. Kjøp 9 billetter til Størst av Alt er Kjærligheten
-4. Sjekk hvilke forestillingrer som finnes på en dato
-5. Sjekk hvilke skuespillere som er med i et stykke
-6. Sjekk hvilke forestillinger som har solgt best
-7. Sjekk hvilke skuespillere som har spilt i samme akt
 
 Skriv inn tall på brukerhistorie du ønsker å teste: 5
 Skriv inn navnet på stykket du ønsker å se skuespillere for: Kongsemnene
@@ -169,26 +74,7 @@ Isak Holmen Sørensen          spiller rollen Trønder(1)                       
 Fabian Heidelberg Lunde       spiller rollen Trønder(2)                         i Kongsemnene
 Fabian Heidelberg Lunde       spiller rollen Baard Bratte                       i Kongsemnene
 
---------------------------------------------------------
-Hva ønsker du å gjøre?
-1. Utføre brukerhistorier
-2. Registrere ny bruker
-3. Kjøp billett(er) til en forestilling
-4. Hent ordre
-5. Avslutte programmet
-
 ### BRUKERHISTORIE 6
-
-Skriv inn tallet til ønsket handling: 1
---------------------------------------------------------
-Hvilken brukerhistorie ønsker du å teste?
-1. Laste opp all data til databaser  [Fullført ved initialisering av programmet]
-2. Fylle inn allerede kjøpt billetter  [Fullført ved initialisering av programmet]
-3. Kjøp 9 billetter til Størst av Alt er Kjærligheten
-4. Sjekk hvilke forestillingrer som finnes på en dato
-5. Sjekk hvilke skuespillere som er med i et stykke
-6. Sjekk hvilke forestillinger som har solgt best
-7. Sjekk hvilke skuespillere som har spilt i samme akt
 
 Skriv inn tall på brukerhistorie du ønsker å teste: 6
 
@@ -207,26 +93,6 @@ Kongsemnene - 05-02-2024 billetter solgt: 0
 Kongsemnene - 06-02-2024 billetter solgt: 0
 
 ### BRUKERHISTORIE 7
-
---------------------------------------------------------
-Hva ønsker du å gjøre?
-1. Utføre brukerhistorier
-2. Registrere ny bruker
-3. Kjøp billett(er) til en forestilling
-4. Hent ordre
-5. Avslutte programmet
-
-
-Skriv inn tallet til ønsket handling: 1
---------------------------------------------------------
-Hvilken brukerhistorie ønsker du å teste?
-1. Laste opp all data til databaser  [Fullført ved initialisering av programmet]
-2. Fylle inn allerede kjøpt billetter  [Fullført ved initialisering av programmet]
-3. Kjøp 9 billetter til Størst av Alt er Kjærligheten
-4. Sjekk hvilke forestillingrer som finnes på en dato
-5. Sjekk hvilke skuespillere som er med i et stykke
-6. Sjekk hvilke forestillinger som har solgt best
-7. Sjekk hvilke skuespillere som har spilt i samme akt
 
 Skriv inn tall på brukerhistorie du ønsker å teste: 7
 Skriv inn navnet på skuespilleren du ønsker å se medskuespillere for: Arturo Scotti
@@ -277,26 +143,6 @@ Per Bogstad Gulliksen         i akt 5 i Kongsemnene
 Snorre Ryen Tøndel            i akt 5 i Kongsemnene
 Synnøve Fossum Eriksen        i akt 5 i Kongsemnene
 
---------------------------------------------------------
-Hva ønsker du å gjøre?
-1. Utføre brukerhistorier
-2. Registrere ny bruker
-3. Kjøp billett(er) til en forestilling
-4. Hent ordre
-5. Avslutte programmet
-
-
-Skriv inn tallet til ønsket handling: 1
---------------------------------------------------------
-Hvilken brukerhistorie ønsker du å teste?
-1. Laste opp all data til databaser  [Fullført ved initialisering av programmet]
-2. Fylle inn allerede kjøpt billetter  [Fullført ved initialisering av programmet]
-3. Kjøp 9 billetter til Størst av Alt er Kjærligheten
-4. Sjekk hvilke forestillingrer som finnes på en dato
-5. Sjekk hvilke skuespillere som er med i et stykke
-6. Sjekk hvilke forestillinger som har solgt best
-7. Sjekk hvilke skuespillere som har spilt i samme akt
-
 Skriv inn tall på brukerhistorie du ønsker å teste: 7
 Skriv inn navnet på skuespilleren du ønsker å se medskuespillere for: Ingunn Beate Strige Øyen
 
@@ -324,14 +170,6 @@ Thomas Jensen Takyi           i akt 3 i Kongsemnene
 
 ### Tilleggsfunksjoner
 
---------------------------------------------------------
-Hva ønsker du å gjøre?
-1. Utføre brukerhistorier
-2. Registrere ny bruker
-3. Kjøp billett(er) til en forestilling
-4. Hent ordre
-5. Avslutte programmet
-
 
 Skriv inn tallet til ønsket handling: 2
 Registrer ny bruker
@@ -342,15 +180,6 @@ Addresse: Gate 1
 5 Tobias BBB 12345 Gate 1
 
 Tobias BBB registrert 
-
-
---------------------------------------------------------
-Hva ønsker du å gjøre?
-1. Utføre brukerhistorier
-2. Registrere ny bruker
-3. Kjøp billett(er) til en forestilling
-4. Hent ordre
-5. Avslutte programmet
 
 
 Skriv inn tallet til ønsket handling: 3
@@ -483,13 +312,6 @@ Antall billetter: 1
 Kongsemnene - 03-02-2024 - Hovedscenen - Parkett - Rad Nr 1 - Sete Nr 1 - 380 kr
 
 --------------------------------------------------------
-Hva ønsker du å gjøre?
-1. Utføre brukerhistorier
-2. Registrere ny bruker
-3. Kjøp billett(er) til en forestilling
-4. Hent ordre
-5. Avslutte programmet
-
 
 Skriv inn tallet til ønsket handling: 4
 Skriv inn telefonnummeret registrert på brukeren din: 12345

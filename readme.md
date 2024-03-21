@@ -1,4 +1,4 @@
-_Hvordan kjøre prosjektet:_
+## Hvordan kjøre prosjektet:
 
 __Initialisering av database__
 ```bash
@@ -43,6 +43,9 @@ Vi har endret Sete-entiteten slik at alle seter har en unik SeteID. Dette ble gj
 
 ### Endret Ordre-entiteten
 Vi fjernet `NOT NULL` fra `pris` og `antall` i Ordre-entiteten da det ble mer hensiktsmessig å opprette en tom ordre først og deretter fylle inn pris og antall senere.
+
+### Endret Billett-entiten
+Endret primærnøkkelen __BillettNr__ fra `INT` til `INTEGER`, slik at det auto-incrementing av en primærnøkkel.
 
 ## Ekstra funksjonalitet
 

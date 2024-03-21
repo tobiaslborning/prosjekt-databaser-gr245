@@ -2,20 +2,20 @@ import queries
 
 def vis_forestillinger():
     input_dato = input("Skriv inn datoen du ønsker å se forestillinger for (dd-mm-yyyy): ")
-    stykker = queries.getStykkerByDato(input_dato)
+    stykker = queries.hentStykkerEtterDato(input_dato)
     print(f"\n----Forestillinger som vises på {input_dato}----\n")
     if len(stykker) == 0:
         print("Ingen forestillinger funnet for denne datoen")
         return
     for stykke in stykker:
-        stykkeID = queries.getTeaterStykkeID(stykke)
-        antallSolgt = queries.getSoldSeats(stykkeID, input_dato)
+        stykkeID = queries.hentTeaterStykkeID(stykke)
+        antallSolgt = queries.hentSolgteSeter(stykkeID, input_dato)
         print(f"{stykke}".ljust(35) + f"|    Antall seter solgt: {len(antallSolgt)}")
 
 def vis_medskuespillere():
     input_skuespiller = input("Skriv inn navnet på skuespilleren du ønsker å se medskuespillere for: ")
     print(f"\n----Medskuespillere til {input_skuespiller}----\n")
-    queries.getOppg7(input_skuespiller)
+    queries.hentOppg7(input_skuespiller)
 
 def printOversikt():
     print("--------------------------------------------------------")
@@ -66,7 +66,7 @@ def printBrukerHistorier():
             
 def vis_flest_forestillinger_solgt():
     print("\n---- Forestillinger som har solgt best ----\n")
-    forestillinger = queries.getForestillingSolgtBest()
+    forestillinger = queries.hentForestillingSolgtBest()
     if forestillinger:
         for forestilling in forestillinger:
             print(f"{forestilling[0]} - {forestilling[1]} billetter solgt: {forestilling[2]}")
@@ -78,7 +78,7 @@ def vis_flest_forestillinger_solgt():
 def vis_skuespillere_i_stykke():
     input_stykke = input("Skriv inn navnet på stykket du ønsker å se skuespillere for: ")
     print(f"\n----Skuespillere----\n")
-    queries.getSkuespillereIStykke(input_stykke)
+    queries.hentSkuespillereIStykke(input_stykke)
 
 def registrer_bruker():
     print("Registrer ny bruker\n")
@@ -90,24 +90,24 @@ def registrer_bruker():
     
 def oppg3_kjop9Billetter():
 
-    ordreNr = queries.generateNewOrderNumber()
+    ordreNr = queries.genererNyttOrdreNr()
     queries.kjop9Billetter(ordreNr)
 
     try:
         print(f"\n----OrdreNr: {ordreNr}----\n")
-        for billett in queries.getBilletterInOrdre(ordreNr):
+        for billett in queries.hentBilletterIOrdre(ordreNr):
             print(f"{billett[0]} - {billett[1]} - {billett[2]} - {billett[3]} - Rad Nr {billett[4]} - Sete Nr {billett[5]} - {billett[6]} kr")
-        print(f"\nTotalpris: {queries.getOrdrePrisAndAntall(ordreNr)[0]} kr\n")
+        print(f"\nTotalpris: {queries.hentOrdrePrisOgAntall(ordreNr)[0]} kr\n")
     except Exception as e:
         print("En feil oppstod under kjøp av billetter, billettene er allerede kjøpt")
-        queries.deleteOrdre(ordreNr)
+        queries.slettOrdre(ordreNr)
         print(f"OrdreNr {ordreNr} slettet")
 
 def kjop_billetter():
     print("Dersom du ikke er registrert er du nødt til å registrere deg først")
     telefon = input("Skriv inn telefonnummeret registrert på brukeren din: ")
     
-    kunde = queries.getKundeByTelefon(telefon)
+    kunde = queries.hentKundeFraTelefon(telefon)
 
     if not kunde:
         print("Ingen bruker med dette telefonnummeret funnet")
@@ -123,7 +123,7 @@ def kjop_billetter():
         print("Ugyldig valg")
         return
     
-    datoer = queries.getDatoByStykkeID(input_stykkeID)
+    datoer = queries.hentDatoFraStykkeID(input_stykkeID)
     print(f"\n----Datoer for forestillingen----\n")
     for dato in datoer:
         print(dato)
@@ -135,7 +135,7 @@ def kjop_billetter():
 
     valgteBillettTyper = dict() # Dict til å holde styr på billetter som skal kjøpes
     print(f"\n----Billettyper----\n")
-    billettTyper = queries.getBillettTyperAndPris(input_stykkeID)
+    billettTyper = queries.hentBillettTyperOgPris(input_stykkeID)
     for billettType in billettTyper:
         if billettType[0] != "Honnør10" and billettType[0] != "Ordinær10":
             print(f"{billettType[0]} - {billettType[1]} kr")
@@ -161,9 +161,9 @@ def kjop_billetter():
     if bekreft.lower() == "n":
         return
     
-    ordreNr = queries.createOrdre(kunde[0])
+    ordreNr = queries.lagOrdre(kunde[0])
 
-    navnOgSal = queries.getStykkeAndSalByID(input_stykkeID)
+    navnOgSal = queries.hentStykkeOgSalFraStykkeID(input_stykkeID)
 
     print(f"\n----Setevalg for {navnOgSal[0]} på {input_dato} i sal {navnOgSal[1]}----\n")
     print(f"For liste over opptatte seter, tast 1")
@@ -171,14 +171,14 @@ def kjop_billetter():
     valg = input("Skriv inn tallet til ønsket handling: ")
     if valg == "1":
         print(f"\n----Vis opptatte seter for {navnOgSal[0]} på {input_dato} i sal {navnOgSal[1]}----\n")
-        for seteInfo in queries.getSoldSeatsWithInfo(input_stykkeID, input_dato):
+        for seteInfo in queries.hentSolgteSeterMedInfo(input_stykkeID, input_dato):
             print(f"Rad {seteInfo[2]} Sete {seteInfo[3]} Område {seteInfo[4]}")
     
     for valgtBillettType in valgteBillettTyper.keys():
         for billett in range(0, valgteBillettTyper[valgtBillettType]):
             while(True):
                 print(f"\n----Setevalg for billet nummer {billett + 1}, type {valgtBillettType}----\n")
-                validOmrader = queries.getOmraderBySal(navnOgSal[1])
+                validOmrader = queries.hentOmraderFraSal(navnOgSal[1])
                 print(f"Gyldige områder: " + ', '.join(validOmrader))
                 print("")
 
@@ -190,43 +190,43 @@ def kjop_billetter():
                 billett_stykkeID = input_stykkeID
                 billett_dato = input_dato
                 billett_ordreNr = ordreNr
-                billett_pris = queries.getPrisByBilletType(input_stykkeID, valgtBillettType)
-                billett_seteID = queries.getSeteID(billett_salNr, billett_seteNr, billett_radNr, billett_omrade)
-                soldSeats = queries.getSoldSeats(input_stykkeID, input_dato)
+                billett_pris = queries.hentPrisEtterBilletType(input_stykkeID, valgtBillettType)
+                billett_seteID = queries.hentSeteID(billett_salNr, billett_seteNr, billett_radNr, billett_omrade)
+                soldSeats = queries.hentSolgteSeter(input_stykkeID, input_dato)
                 
                 if billett_seteID != None and billett_seteID not in soldSeats:
-                    queries.createBillett(billett_stykkeID, billett_dato, billett_seteID, valgtBillettType, billett_ordreNr, billett_pris)
+                    queries.lagBillett(billett_stykkeID, billett_dato, billett_seteID, valgtBillettType, billett_ordreNr, billett_pris)
                     print(f"\nBillett {billett + 1} av type {valgtBillettType} kjøpt\n")
                     break
                 else:
                     print("\nUgyldig sete")
                     valg = input("Skriv 1 for å avslutte kjøp av billetter, enter for å prøve på nytt\n")
                     if valg == "1":
-                        queries.deleteOrdre(ordreNr)
+                        queries.slettOrdre(ordreNr)
                         return
                     
-    queries.updateOrdrePrisAndAntall(ordreNr)
+    queries.oppdaterOrdrePrisOgAntall(ordreNr)
                     
     print(f"\nOrdre {ordreNr} fullført\n")
-    ordreOgAntall = queries.getOrdrePrisAndAntall(ordreNr)
+    ordreOgAntall = queries.hentOrdrePrisOgAntall(ordreNr)
     print(f"Totalpris: {ordreOgAntall[0]} kr")
     print(f"Antall billetter: {ordreOgAntall[1]}")
     print(f"\n---------Dine billetter---------\n")
-    for billett in queries.getBilletterInOrdre(ordreNr):
+    for billett in queries.hentBilletterIOrdre(ordreNr):
         print(f"{billett[0]} - {billett[1]} - {billett[2]} - {billett[3]} - Rad Nr {billett[4]} - Sete Nr {billett[5]} - {billett[6]} kr")
         
 def hent_ordre():
     telefon = input("Skriv inn telefonnummeret registrert på brukeren din: ")
-    ordre = queries.getKundeOrdre(telefon)
+    ordre = queries.hentKundeOrdre(telefon)
     if not ordre:
         print("Ingen ordre med dette nummeret funnet")
         return
     for ordreNr in ordre:
-        queries.updateOrdrePrisAndAntall(ordreNr)
+        queries.oppdaterOrdrePrisOgAntall(ordreNr)
         print(f"\n----OrdreNr: {ordreNr}----\n")
-        for billett in queries.getBilletterInOrdre(ordreNr):
+        for billett in queries.hentBilletterIOrdre(ordreNr):
             print(f"{billett[0]} - {billett[1]} - {billett[2]} - {billett[3]} - Rad Nr {billett[4]} - Sete Nr {billett[5]} - {billett[6]} kr")
-        print(f"\nTotalpris: {queries.getOrdrePrisAndAntall(ordreNr)[0]} kr\n")
+        print(f"\nTotalpris: {queries.hentOrdrePrisOgAntall(ordreNr)[0]} kr\n")
 
 def main():
     while True:

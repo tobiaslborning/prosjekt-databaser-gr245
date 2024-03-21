@@ -1,7 +1,7 @@
 import sqlite3
 import datetime
 
-def getTeaterStykkeID(stykkeNavn):
+def hentTeaterStykkeID(stykkeNavn):
     """
     Retrieves the TeaterStykkeID from the database based on the provided parameters.
 
@@ -21,7 +21,7 @@ def getTeaterStykkeID(stykkeNavn):
     con.close()
     return stykkeID[0]
 
-def getSeteID(salNr, seteNr, radNr, omrade):
+def hentSeteID(salNr, seteNr, radNr, omrade):
     """
     Retrieves the SeteID from the database based on the provided parameters.
 
@@ -48,7 +48,7 @@ def getSeteID(salNr, seteNr, radNr, omrade):
         return None
     return seteID[0]
 
-def getSoldSeats(stykkeID, dato):
+def hentSolgteSeter(stykkeID, dato):
     """
     Retrieves the sold seats from the database based on the provided parameters.
 
@@ -69,7 +69,7 @@ def getSoldSeats(stykkeID, dato):
     con.close()
     return [x[0] for x in seteID]
 
-def getSoldSeatsWithInfo(stykkeID, dato):
+def hentSolgteSeterMedInfo(stykkeID, dato):
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
@@ -83,7 +83,7 @@ def getSoldSeatsWithInfo(stykkeID, dato):
     con.close()
     return [x for x in seteID]
 
-def isSeatSold(stykkeID, dato, seteNr, radNr, omrade):
+def erSeteSolgt(stykkeID, dato, seteNr, radNr, omrade):
     """
     Checks if a seat is sold based on the provided parameters.
 
@@ -105,10 +105,10 @@ def isSeatSold(stykkeID, dato, seteNr, radNr, omrade):
     cursor.execute("SELECT SalNr FROM TeaterStykke WHERE StykkeID = ?", (stykkeID))
     salNr = cursor.fetchone()
     con.close()
-    seteID = getSeteID(salNr[0],seteNr,radNr,omrade)
-    return seteID in [x for x in getSoldSeats(stykkeID,dato)]
+    seteID = hentSeteID(salNr[0],seteNr,radNr,omrade)
+    return seteID in [x for x in hentSolgteSeter(stykkeID,dato)]
 
-def getSkuespillereIStykke(stykkeNavn):
+def hentSkuespillereIStykke(stykkeNavn):
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
@@ -136,7 +136,7 @@ def getSkuespillereIStykke(stykkeNavn):
     for row in info:
         print(f"{row[1]}".ljust(30) + f"spiller rollen {row[2]}".ljust(50) + f"i {row[0]}")
     
-def getStykkerByDato(dato):
+def hentStykkerEtterDato(dato):
     """
     Retrieves the plays from the database based on the provided date.
 
@@ -157,7 +157,7 @@ def getStykkerByDato(dato):
     con.close()
     return [x[0] for x in navn]
 
-def generateNewOrderNumber(): 
+def genererNyttOrdreNr(): 
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
@@ -171,7 +171,7 @@ def generateNewOrderNumber():
         return 1
     return int(antall[0])+1
 
-def getAkter(skuespillerNavn):
+def hentAkter(skuespillerNavn):
     """
     Returns list of tuples with the AktNr and StykkeID of the plays the actor has a role in.
     """
@@ -201,7 +201,7 @@ def getAkter(skuespillerNavn):
     con.close()
     return [x for x in akter]
 
-def getSkuespillereInAkt(aktNr, stykkeID):
+def hentSkuespillereInAkt(aktNr, stykkeID):
     """
     Returns list of tuples with the SkuespillerID and SkuespillerNavn of the actors in the play.
     """
@@ -231,7 +231,7 @@ def getSkuespillereInAkt(aktNr, stykkeID):
     con.close()
     return [x[0] for x in skuespillere]
 
-def isInDb(skuespillerNavn):
+def erSkuespillerIDb(skuespillerNavn):
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
@@ -247,16 +247,16 @@ def isInDb(skuespillerNavn):
     con.close()
     return len(skuespillere) > 0
 
-def getMedSkuespillere(skuespillerNavn):
-    akter = getAkter(skuespillerNavn)
+def hentMedSkuespillere(skuespillerNavn):
+    akter = hentAkter(skuespillerNavn)
     medSkuespillere = dict()
 
-    if not isInDb(skuespillerNavn):
+    if not erSkuespillerIDb(skuespillerNavn):
         print(f"{skuespillerNavn} er ikke i databasen")
         return
     
     for akt in akter:
-        skuespillere = getSkuespillereInAkt(akt[0],akt[1])
+        skuespillere = hentSkuespillereInAkt(akt[0],akt[1])
         for skuespiller in skuespillere:
             if skuespillerNavn != skuespiller:
                 if skuespiller not in medSkuespillere.keys():
@@ -292,7 +292,7 @@ def registrerKunde(navn, telefon, addresse):
     con.commit()
     con.close()
 
-def getDatoByStykkeID(stykkeID):
+def hentDatoFraStykkeID(stykkeID):
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
@@ -302,7 +302,7 @@ def getDatoByStykkeID(stykkeID):
     con.close()
     return [x[0] for x in dato]
 
-def setOrdreAntallOgPris(ordreNr):
+def settOrdreAntallOgPris(ordreNr):
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
@@ -322,7 +322,7 @@ def setOrdreAntallOgPris(ordreNr):
 
 def kjop9Billetter(ordreNr):
     # Henter opptatte
-    takenSeats = getSoldSeats(1, '06-02-2024')
+    takenSeats = hentSolgteSeter(1, '06-02-2024')
 
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
@@ -341,7 +341,7 @@ def kjop9Billetter(ordreNr):
     omrade = "Parkett"
     radNr = 1
     for seteNr in range(1,10):
-        seteID = getSeteID(2, seteNr, radNr, omrade)
+        seteID = hentSeteID(2, seteNr, radNr, omrade)
 
         if seteID in takenSeats:
             print(f"\nSete {seteNr} på rad {radNr} i området {omrade} er opptatt")
@@ -359,11 +359,11 @@ def kjop9Billetter(ordreNr):
     con.commit()
     con.close()
 
-    updateOrdrePrisAndAntall(ordreNr)
+    oppdaterOrdrePrisOgAntall(ordreNr)
 
     return ordreNr
     
-def getForestillingSolgtBest():
+def hentForestillingSolgtBest():
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
@@ -384,7 +384,7 @@ def getForestillingSolgtBest():
     con.close()
     return [x for x in info]
 
-def getBillettTyperAndPris(StykkeID):
+def hentBillettTyperOgPris(StykkeID):
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
@@ -395,7 +395,7 @@ def getBillettTyperAndPris(StykkeID):
     con.close()
     return [x for x in billettTyper]
 
-def getPrisByBilletType(StykkeID, billettType):
+def hentPrisEtterBilletType(StykkeID, billettType):
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
@@ -405,9 +405,9 @@ def getPrisByBilletType(StykkeID, billettType):
     con.close()
     return pris[0]
 
-def createOrdre(kundenr):
+def lagOrdre(kundenr):
 
-    ordreNr = generateNewOrderNumber()
+    ordreNr = genererNyttOrdreNr()
 
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
@@ -424,7 +424,7 @@ def createOrdre(kundenr):
 
     return ordreNr
 
-def getStykkeAndSalByID(stykkeID):
+def hentStykkeOgSalFraStykkeID(stykkeID):
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
@@ -434,7 +434,7 @@ def getStykkeAndSalByID(stykkeID):
     con.close()
     return stykke
 
-def getKundeByTelefon(tlf):
+def hentKundeFraTelefon(tlf):
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
@@ -444,7 +444,7 @@ def getKundeByTelefon(tlf):
     con.close()
     return kunde
 
-def getOmraderBySal(salNr):
+def hentOmraderFraSal(salNr):
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
@@ -454,7 +454,7 @@ def getOmraderBySal(salNr):
     con.close()
     return [x[0] for x in omrader]
 
-def createBillett(stykkeID, dato, seteID, billettType, ordreNr, pris):
+def lagBillett(stykkeID, dato, seteID, billettType, ordreNr, pris):
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
@@ -465,7 +465,7 @@ def createBillett(stykkeID, dato, seteID, billettType, ordreNr, pris):
     con.commit()
     con.close()
 
-def deleteOrdre(ordreNr):
+def slettOrdre(ordreNr):
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
@@ -475,7 +475,7 @@ def deleteOrdre(ordreNr):
     con.commit()
     con.close()
 
-def getBilletterInOrdre(ordreNr):
+def hentBilletterIOrdre(ordreNr):
     '''
     returns (StykkeNavn, Dato, SalNavn, Område, RadNr, SeteNr, Pris)
     '''
@@ -500,7 +500,7 @@ def getBilletterInOrdre(ordreNr):
     con.close()
     return ordre
 
-def getKundeOrdre(telefon):
+def hentKundeOrdre(telefon):
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
@@ -517,7 +517,7 @@ def getKundeOrdre(telefon):
 
     return [x[0] for x in ordre]
 
-def updateOrdrePrisAndAntall(ordreNr):
+def oppdaterOrdrePrisOgAntall(ordreNr):
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")
@@ -562,7 +562,7 @@ def updateOrdrePrisAndAntall(ordreNr):
     con.commit()
     con.close()
 
-def getOrdrePrisAndAntall(ordreNr):
+def hentOrdrePrisOgAntall(ordreNr):
 
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
@@ -574,7 +574,7 @@ def getOrdrePrisAndAntall(ordreNr):
     con.close()
     return info
 
-def getOppg7(skuespillerNavn):
+def hentOppg7(skuespillerNavn):
     con = sqlite3.connect('teaterDB.db')
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sqlite_master")

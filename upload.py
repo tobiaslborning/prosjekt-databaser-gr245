@@ -5,7 +5,7 @@ import queries
 conn = sqlite3.connect('teaterDB.db')
 cursor = conn.cursor()
 
-def addSkuespillere():
+def leggTilSkuespillere():
     #Fjerner alle skuespillere før innsetting
     cursor.execute(
         "DELETE FROM Skuespiller"
@@ -50,7 +50,7 @@ def addSkuespillere():
     cursor.execute(
         "INSERT INTO Skuespiller VALUES ('23', '23')")
     
-def addDirektor():
+def leggTilDirektor():
     # Fjerner alle direktører før innsetting
     cursor.execute(
         "DELETE FROM Direktor"
@@ -59,7 +59,7 @@ def addDirektor():
     cursor.execute(
         "INSERT INTO Direktor VALUES ('25','30')")
 
-def addHarRolle():
+def leggTilHarRolle():
     #Fjerner alle HarRoller før innsetting
     cursor.execute(
         "DELETE FROM HarRolle"
@@ -114,7 +114,7 @@ def addHarRolle():
     cursor.execute(
         "INSERT INTO HarRolle VALUES ('24', '23')")
     
-def addRolle():
+def leggTilRolle():
     #Fjerner alle roller før innsetting
     cursor.execute(
         "DELETE FROM Rolle"
@@ -165,7 +165,7 @@ def addRolle():
     cursor.execute(
         "INSERT INTO Rolle VALUES ('22', 'Åsmund Flaten')")
 
-def addAnsatte():
+def leggTilAnsatte():
     #Fjerner alle ansatte før innsetting
     cursor.execute(
         "DELETE FROM Ansatt"
@@ -236,7 +236,7 @@ def addAnsatte():
     cursor.execute(
         "INSERT INTO Ansatt VALUES (30, 'Lars Kirksæther','NULL', 'Fast')")
     
-def addHarOppgave():
+def leggTilHarOppgave():
     #Fjerner alle HarOppgaver før innsetting
     cursor.execute(
         "DELETE FROM HarOppgave"
@@ -302,7 +302,7 @@ def addHarOppgave():
     cursor.execute(
         "INSERT INTO HarOppgave VALUES ('2', '28', 'Dramaturg')")
    
-def addKunde():
+def leggTilKunde():
     #Fjerner alle kunder før innsetting
     cursor.execute(
         "DELETE FROM Kunde"
@@ -317,7 +317,7 @@ def addKunde():
     cursor.execute(
         "INSERT INTO Kunde VALUES ('4', 'Ola Nordmann', '94129340', 'Klaebuveien 48')")
     
-def addTeaterStykke():    
+def leggTilTeaterStykke():    
     #Fjerner alle teaterstykker før innsetting
     cursor.execute("DELETE FROM TeaterStykke")
     #Innsetning av teaterstykke
@@ -326,7 +326,7 @@ def addTeaterStykke():
     cursor.execute(
         "INSERT INTO TeaterStykke VALUES (2,'Kongsemnene', '1')") #Kongsemnene har id 2
     
-def addTeaterOppsettning():
+def leggTilTeaterOppsettning():
     #Fjerner alle teateroppsetninger før innsetting
     cursor.execute(
         "DELETE FROM TeaterOppsettning"
@@ -355,7 +355,7 @@ def addTeaterOppsettning():
     cursor.execute(
         "INSERT INTO TeaterOppsettning VALUES ('06-02-2024', '2')")
 
-def addAkt():
+def leggTilAkt():
     #Fjerner alle akt før innsetting
     cursor.execute(
         "DELETE FROM Akt"
@@ -374,7 +374,7 @@ def addAkt():
     cursor.execute(
         "INSERT INTO Akt VALUES (1, '1', 'Kjærlighet')")
 
-def addRolleIAkt():
+def leggTilRolleIAkt():
     #Fjerner alle roller i akt før innsetting
     cursor.execute(
         "DELETE FROM RolleIAkt"
@@ -493,7 +493,7 @@ def addRolleIAkt():
     cursor.execute(
         "INSERT INTO RolleIAkt VALUES ('1', '1', '22')")
     
-def addPrisTabell():
+def leggTilPrisTabell():
     #Fjerner alle priser før innsetting
     cursor.execute(
         "DELETE FROM PrisTabell"
@@ -522,7 +522,7 @@ def addPrisTabell():
     cursor.execute(
          "INSERT INTO PrisTabell VALUES ('2', 'Honnør10', '360')")
 
-def addSalAndSete():
+def leggTilSalOgSete():
     # Slett alt i TeaterSal og Sete
     cursor.execute('DELETE FROM TeaterSal')
     cursor.execute('DELETE FROM Sete')
@@ -608,33 +608,34 @@ def addSalAndSete():
         cursor.execute("INSERT INTO Sete VALUES (?,2,?,?,'Galleri')",(seteID, seteNr,3))
 
 
-def deleteAllOrdre():
+def slettAlleOrdre():
     cursor.execute(
         "DELETE FROM Ordre"
     )
 
-def deleteAllBilletter():
+def slettAlleBilletter():
     cursor.execute(
         "DELETE FROM Billett"
     )
 
 def upload():
-    addSalAndSete() 
-    addTeaterStykke() 
-    addTeaterOppsettning() 
-    addAnsatte()
-    addSkuespillere()
-    addDirektor()
-    addRolle() 
-    addHarRolle()
-    addAkt()
-    addRolleIAkt()
-    addHarOppgave()
-    addKunde()
-    addPrisTabell()
-    deleteAllOrdre()
-    deleteAllBilletter()
-    print("\nUpload complete\n")
+    leggTilSalOgSete() 
+    leggTilTeaterStykke() 
+    leggTilTeaterOppsettning() 
+    leggTilAnsatte()
+    leggTilSkuespillere()
+    leggTilDirektor()
+    leggTilRolle() 
+    leggTilHarRolle()
+    leggTilAkt()
+    leggTilRolleIAkt()
+    leggTilHarOppgave()
+    leggTilKunde()
+    leggTilPrisTabell()
+    slettAlleOrdre()
+    slettAlleBilletter()
+    print("\nInformasjonen er lastet inn i databasen\n")
+
 upload()
 conn.commit()
 conn.close()
